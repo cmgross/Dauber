@@ -1,0 +1,89 @@
+﻿@model Dauber.Models.AdminAllCoachesViewModel
+
+@{
+    ViewBag.Title = "Admin";
+}
+
+<h3>Active Coaches</h3>
+<table class="table table-bordered table-hover table-condensed" id="tbactiveCoaches">
+    <thead>
+        <tr>
+            <th class="centerAlign">CoachId</th>
+            <th class="centerAlign">User</th>
+            <th class="centerAlign">Active</th>
+            <th class="centerAlign">Admin</th>
+            <th class="centerAlign">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var coach in Model.ActiveCoaches)
+        {
+            <tr class="centerAlign">
+                <td>@Html.DisplayFor(modelItem => coach.CoachId)</td>
+                <td>@Html.DisplayFor(modelItem => coach.UserName)</td>
+                <td>@Html.DisplayFor(modelItem => coach.Active)</td>
+                <td>@Html.DisplayFor(modelItem => coach.Admin)</td>
+                <td>
+                    @using (Html.BeginForm("ChangeActive", "Admin", FormMethod.Post, new { role = "form", @class = "form-inline" }))
+                    {
+                        @Html.HiddenFor(m => coach.Id)
+                        @Html.HiddenFor(m => coach.Active)
+
+                        <button type="submit" class="btn btn-warning btn-xs" style="float: left">Set Inactive</button>
+                    }
+                    @using (Html.BeginForm("Delete", "Admin", FormMethod.Post, new { id = "deleteCoach" + coach.CoachId, role = "form", @class = "deleteClientForm" }))
+                    {
+                        @Html.HiddenFor(m => coach.Id)
+                        @Html.HiddenFor(m => coach.Active)
+                        var formId = "deleteCoach" + coach.CoachId;
+                        <input type="submit" value="Delete" class="btn btn-danger btn-xs" onclick="@String.Format("DeleteConfirmation('{0}')", formId)" />
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<h3>Inactive Coaches</h3>
+<table class="table table-bordered table-hover table-condensed" id="tbinactiveCoaches">
+    <thead>
+        <tr>
+            <th class="centerAlign">CoachId</th>
+            <th class="centerAlign">User</th>
+            <th class="centerAlign">Active</th>
+            <th class="centerAlign">Admin</th>
+            <th class="centerAlign">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var coach in Model.InactiveCoaches)
+        {
+            <tr class="centerAlign">
+                <td>@Html.DisplayFor(modelItem => coach.CoachId)</td>
+                <td>@Html.DisplayFor(modelItem => coach.UserName)</td>
+                <td>@Html.DisplayFor(modelItem => coach.Active)</td>
+                <td>@Html.DisplayFor(modelItem => coach.Admin)</td>
+                <td>
+                    @using (Html.BeginForm("ChangeActive", "Admin", FormMethod.Post, new { role = "form", @class = "form-inline" }))
+                    {
+                        @Html.HiddenFor(m => coach.Id)
+                        @Html.HiddenFor(m => coach.Active)
+
+                        <button type="submit" class="btn btn-success btn-xs" style="float: left">Set Active</button>
+                    }
+                    @using (Html.BeginForm("Delete", "Admin", FormMethod.Post, new { id = "deleteCoach" + coach.CoachId, role = "form", @class = "deleteClientForm" }))
+                    {
+                        @Html.HiddenFor(m => coach.Id)
+                        @Html.HiddenFor(m => coach.Active)
+                        var formId = "deleteCoach" + coach.CoachId;
+                        <input type="submit" value="Delete" class="btn btn-danger btn-xs" onclick="@String.Format("DeleteConfirmation('{0}')", formId)" />
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/clientsIndex")
+}

@@ -1,0 +1,74 @@
+﻿@model DAL.Coach
+
+@{
+    ViewBag.Title = "Clients";
+}
+<div class="well">
+    <h2>Using Dauber</h2>
+    <p class="lead">Dauber is an API that can be uesd to import your client's MFP diary information.</p>
+    @{
+        var url = "http://dauber.apphb.com/api/v1/diary/" + Model.CoachId + "/{username}/{date}";
+
+    }
+    <label for="apiExample">Your custom API URL: </label>&nbsp;&nbsp;&nbsp;<input type="text" name="apiExample" id="apiExample" disabled value="@url" style="width:400px "><br /><br />
+    <p>
+        The number in the above URL after the word diary is your Coach Id.<br/>
+        Replace {username} with your client's MFP username, and {date} with a date formatted like "05-20-2015".<br/>
+        You can only access the diary of clients added to your account, and their diaries must be public.
+    </p>
+    <br/>
+    @{
+        var formula = "=IMPORTDATA(CONCATENATE('https://dauber.apphb.com/api/v1/diary/'" + Model.CoachId + "',$A$1,'/',TEXT(A2'mm-DD-yyyy')))";
+    }
+    <label for="sheetsExample">Usage in Google Sheets: </label>&nbsp;&nbsp;&nbsp;<input type="text" name="sheetsExample" id="sheetsExample" disabled value="@formula" style="width: 750px"><br/><br/>
+    <p>In the above example, the client username goes in Cell A1, and the date does in A2.<br/>
+        I have an example Google Sheet where I am using this formula to pull my MFP diary info in.<br/>
+    Please message me and I'll add you to it so that you can try it out!
+    </p>
+</div>
+
+
+<h2>Clients</h2>
+
+<p>
+    <input type="button" class="btn btn-success btn-sm" value="Add Client" onclick="location.href = '@Url.Action("Add", "Clients", new { coachId = Model.Id })'">
+</p>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            MFP Username
+        </th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model.Clients)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientUserName)
+            </td>
+            <td>
+                @using (Html.BeginForm("Delete", "Clients", FormMethod.Post, new { id = "deleteClient" + item.Id, role = "form", @class = "deleteClientForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("clientId", item.Id)
+                    var formId = "deleteClient" + item.Id;
+                    <input type="button" class="btn btn-primary btn-xs" value="Edit" onclick="location.href = '@Url.Action("Edit", "Clients", new { clientId = item.Id })'">
+                    <input type="submit" value="Delete" class="btn btn-danger btn-xs" onclick="@String.Format("DeleteConfirmation('{0}')", formId)" />
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/clientsIndex")
+}
