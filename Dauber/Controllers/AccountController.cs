@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Dauber.Models;
+using DAL;
 
 namespace Dauber.Controllers
 {
@@ -369,18 +370,24 @@ namespace Dauber.Controllers
                     return View("ExternalLoginFailure");
                 }
                 //email confirmed is true because we are only allowing Google login
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, EmailConfirmed = true };
-                var result = await UserManager.CreateAsync(user);
-                if (result.Succeeded)
+                var stripeResult = Stripe.CreateCustomer(info.DefaultUserName, model.Email, "free");
+                IdentityResult result = new IdentityResult();
+                if (stripeResult.Success)
                 {
-                    result = await UserManager.AddLoginAsync(user.Id, info.Login);
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, EmailConfirmed = true, Active = true, PlanId = "free", StripeCustomerId = stripeResult.CustomerId };
+                    result = await UserManager.CreateAsync(user);
                     if (result.Succeeded)
                     {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToLocal(returnUrl);
+                        result = await UserManager.AddLoginAsync(user.Id, info.Login);
+                        if (result.Succeeded)
+                        {
+                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                            return RedirectToLocal(returnUrl);
+                        }
                     }
                 }
                 AddErrors(result);
+                ModelState.AddModelError("", stripeResult.Error);
             }
 
             ViewBag.ReturnUrl = returnUrl;
