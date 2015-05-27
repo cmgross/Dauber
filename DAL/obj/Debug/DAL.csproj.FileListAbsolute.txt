@@ -2,9 +2,11 @@ C:\VS\Visual Studio 2013\Projects\Dauber\DAL\bin\Debug\DAL.dll
 C:\VS\Visual Studio 2013\Projects\Dauber\DAL\bin\Debug\DAL.pdb
 C:\VS\Visual Studio 2013\Projects\Dauber\DAL\obj\Debug\DAL.dll
 C:\VS\Visual Studio 2013\Projects\Dauber\DAL\obj\Debug\DAL.pdb
-C:\VS\Visual Studio 2013\Projects\Dauber\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\DAL\bin\Debug\DAL.dll
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\DAL\bin\Debug\DAL.pdb
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\DAL\obj\Debug\DAL.dll
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\DAL\obj\Debug\DAL.pdb
+C:\VS\Visual Studio 2013\Projects\Dauber\DAL\bin\Debug\Newtonsoft.Json.dll
+C:\VS\Visual Studio 2013\Projects\Dauber\DAL\bin\Debug\Stripe.net.dll
+C:\VS\Visual Studio 2013\Projects\Dauber\DAL\bin\Debug\Newtonsoft.Json.xml

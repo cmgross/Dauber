@@ -9,7 +9,6 @@ namespace Dauber
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            //TODO integrate stripe (big picture)
         }
     }
 }
