@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Dauber.Models;
+using Newtonsoft.Json;
 
 
 namespace Dauber.Controllers
@@ -22,6 +23,24 @@ namespace Dauber.Controllers
         public ActionResult Plan()
         {
             return View(new MyAccountUpdateViewModel(User.Identity.Name));
+        }
+
+        [HttpGet]
+        public ActionResult UpdateCard()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public JsonResult GetPlan(string planId)
+        {
+            var plan = DAL.Plan.Get(planId);
+            var result = new JsonResult
+            {
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                Data = JsonConvert.SerializeObject(plan)
+            };
+            return result;
         }
     }
 }

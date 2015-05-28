@@ -35,6 +35,9 @@ namespace Dauber
 
             bundles.Add(new ScriptBundle("~/bundles/ClientsIndex").Include(
               "~/Scripts/clientsIndex.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/PlanChange").Include(
+             "~/Scripts/planChange.js"));
         }
     }
 }

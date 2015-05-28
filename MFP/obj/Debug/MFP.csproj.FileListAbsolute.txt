@@ -12,3 +12,4 @@ C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\MFP\bin\Debug\HtmlAg
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\MFP\bin\Debug\HtmlAgilityPack.xml
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\MFP\obj\Debug\MFP.dll
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\MFP\obj\Debug\MFP.pdb
+C:\VS\Visual Studio 2013\Projects\Dauber\MFP\obj\Debug\MFP.csprojResolveAssemblyReference.cache

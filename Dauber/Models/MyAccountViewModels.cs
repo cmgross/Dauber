@@ -36,20 +36,25 @@ namespace Dauber.Models
         public bool HasPaymentMethod { get; set; }
         public string CustomerId { get; set; }
         public int CoachId { get; set; }
+        [Display(Name = "Plan")]
         public string PlanId { get; set; }
+        [Display(Name = "Current Clients")]
         public int NumberOfClients { get; set; }
+        [Display(Name = "Max Clients")]
         public int PlanMax { get; set; }
+        [Display(Name = "Monthly Cost")]
+        public int PlanCost { get; set; }
         public List<SelectListItem> Plans { get; set; }
         public string ApiKey { get; set; }
+        public string UserName { get; set; }
 
         public MyAccountUpdateViewModel() { }
         public MyAccountUpdateViewModel(string userName)
         {
             var coach = Coach.Get(userName);
             var customer = StripeService.GetCustomer(coach.StripeCustomerId);
-            var plans = StripeService.GetPlans();
+            var plans = StripeService.GetPlans(); //TODO cache these!!
 
-            PlanMax = Plan.GetPlanMax(coach.PlanId);
             Plans = plans.Select(p => new SelectListItem
             {
                 Text = p.Name,
@@ -57,6 +62,11 @@ namespace Dauber.Models
                 Selected = p.Id == coach.PlanId
             }).ToList();
 
+            PlanMax = coach.Plan.MaxClients;
+            PlanCost = coach.Plan.Cost;
+
+            //TODO fields not in use yet below
+            UserName = coach.UserName; //TODO username is cardholder name for the token
             HasPaymentMethod = customer.StripeCardList.TotalCount > 0;
             CustomerId = customer.Id;
             PlanId = coach.PlanId;
@@ -65,7 +75,7 @@ namespace Dauber.Models
             ApiKey = ConfigurationManager.AppSettings["StripeApiKeyPublic"];
             var what = customer.StripeSubscriptionList.StripeSubscriptions[0].Id;
 
-            StripeService.UpdatePlan(CustomerId, what, "mithril");
+            //StripeService.UpdatePlan(CustomerId, what, "mithril");
             //need to deal with the Max clients per plan from plans database, and if coach has more than max
             //TODO use public API key for the javascript
         }
