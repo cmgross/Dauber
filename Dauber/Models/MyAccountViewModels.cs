@@ -31,7 +31,7 @@ namespace Dauber.Models
             CurrentClients = coach.Clients.Count;
         }
     }
-    public class MyAccountUpdateViewModel
+    public class MyAccountUpdatePlanViewModel
     {
         public bool HasPaymentMethod { get; set; }
         public string CustomerId { get; set; }
@@ -47,13 +47,16 @@ namespace Dauber.Models
         public List<SelectListItem> Plans { get; set; }
         public string ApiKey { get; set; }
         public string UserName { get; set; }
+        public string SubscriptionId { get; set; }
+        public string CurrentPlanId { get; set; }
 
-        public MyAccountUpdateViewModel() { }
-        public MyAccountUpdateViewModel(string userName)
+
+        public MyAccountUpdatePlanViewModel() { }
+        public MyAccountUpdatePlanViewModel(string userName)
         {
             var coach = Coach.Get(userName);
             var customer = StripeService.GetCustomer(coach.StripeCustomerId);
-            var plans = StripeService.GetPlans(); //TODO cache these!!
+            var plans = StripeService.GetPlans();
 
             Plans = plans.Select(p => new SelectListItem
             {
@@ -64,20 +67,32 @@ namespace Dauber.Models
 
             PlanMax = coach.Plan.MaxClients;
             PlanCost = coach.Plan.Cost;
-
-            //TODO fields not in use yet below
-            UserName = coach.UserName; //TODO username is cardholder name for the token
+            UserName = coach.UserName;
             HasPaymentMethod = customer.StripeCardList.TotalCount > 0;
             CustomerId = customer.Id;
             PlanId = coach.PlanId;
+            CurrentPlanId = coach.PlanId;
             CoachId = coach.CoachId;
             NumberOfClients = coach.Clients.Count;
             ApiKey = ConfigurationManager.AppSettings["StripeApiKeyPublic"];
-            var what = customer.StripeSubscriptionList.StripeSubscriptions[0].Id;
-
-            //StripeService.UpdatePlan(CustomerId, what, "mithril");
-            //need to deal with the Max clients per plan from plans database, and if coach has more than max
-            //TODO use public API key for the javascript
+            SubscriptionId = customer.StripeSubscriptionList.StripeSubscriptions[0].Id;
         }
+    }
+
+    public class MyAccountUpdatePlanSubmisionViewModel
+    {
+        [Required]
+        public string Token { get; set; } //to process charge we need a token,  and a username
+        [Required]
+        public string UserName { get; set; }
+        [Required]
+        public string PlanId { get; set; }//to update user's plan and charge it, we need planId, customerId, subscription Id
+        [Required]
+        public string CustomerId { get; set; }
+        [Required]
+        public string SubscriptionId { get; set; }
+        [Required]
+        public string CoachId { get; set; } //to update a user in dauber, we need a planId, and coachId
+
     }
 }

@@ -299,7 +299,7 @@
     <Content Include="Views\Shared\Info.cshtml" />
     <Content Include="Views\Clients\Edit.cshtml" />
     <Content Include="Views\MyAccount\Index.cshtml" />
-    <Content Include="Views\MyAccount\Plan.cshtml" />
+    <Content Include="Views\MyAccount\UpdatePlan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

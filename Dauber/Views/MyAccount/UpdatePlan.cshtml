@@ -1,0 +1,113 @@
+﻿@model Dauber.Models.MyAccountUpdatePlanViewModel
+
+@{
+    ViewBag.Title = "Update Plan";
+}
+
+<h3>Update Plan</h3>
+<br />
+<div id="dPaymentInfo" style="display: none;">
+    <h4>Payment Information</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <label for="txtCardNumber">Card Number *</label>
+        </dt>
+
+        <dd>
+            <input type="text" name="CardNumber" id="txtCardNumber" placeholder="Card Number e.g 1234..." value="4242424242424242" />
+        </dd>
+
+        <dt>
+            <label for="txtCvc">Cvc *</label>
+        </dt>
+
+        <dd>
+            <input type="text" name="Cvc" id="txtCvc" placeholder="Security Code e.g 987" value="123" />
+        </dd>
+
+        <dt>
+            <label for="txtExpiryMonth">Expiry Month (MM) *</label>
+        </dt>
+
+        <dd>
+            <input type="text" name="ExpiryMonth" id="txtExpiryMonth" placeholder="01" value="12" />
+        </dd>
+
+        <dt>
+            <label for="txtExpiryYear">Expiry Year (YYYY) *</label>)
+        </dt>
+
+        <dd>
+            <input type="text" name="ExpiryYear" id="txtExpiryYear" placeholder="2015" value="2016" />
+        </dd>
+
+        <dt></dt>
+        <dd>
+            <br />
+            <a href="https://stripe.com/about" target="_blank"><img src="~/Images/poweredbyStripe.png" /></a>
+        </dd>
+    </dl>
+</div>
+<br /><br />
+@Html.HiddenFor(m => m.HasPaymentMethod)
+@Html.HiddenFor(m => m.ApiKey)
+@Html.HiddenFor(m => m.CurrentPlanId)
+@using (Html.BeginForm("UpdatePlan", "MyAccount", FormMethod.Post, new { id = "updatePlan" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>Plan Selection</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.PlanId, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.PlanId, Model.Plans, new { @class = "form-control", style = "width:250px" })
+                @Html.ValidationMessageFor(model => model.PlanId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PlanCost, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.PlanCost, "{0:c}", new { @class = "form-control", @readonly = "readonly", style = "width:100px" })
+                @Html.ValidationMessageFor(model => model.PlanId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PlanMax, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.PlanMax, new { @class = "form-control", @readonly = "readonly", style = "width:100px" })
+                @Html.ValidationMessageFor(model => model.PlanMax, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NumberOfClients, new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.NumberOfClients, new {@class = "form-control", @readonly = "readonly", style = "width:100px"})
+                @Html.ValidationMessageFor(model => model.NumberOfClients, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.Hidden("Token")
+                @Html.HiddenFor(m => m.UserName)
+                @Html.HiddenFor(m => m.CustomerId)
+                @Html.HiddenFor(m => m.SubscriptionId)
+                @Html.HiddenFor(m => m.CoachId)
+                <input type="submit" value="Save" id="btnSave" class="btn btn-success" disabled="disabled" />
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    @Scripts.Render("~/bundles/PlanChange")
+}

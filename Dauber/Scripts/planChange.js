@@ -2,17 +2,20 @@
     //$("#").val("");
 }
 
-function userCardCheck() {
+function checkIfPaymentMethodNeeded() {
     var hasPaymentMethod = $("#HasPaymentMethod").val();
     if (hasPaymentMethod === "False") {
         $("#dPaymentInfo").css("display", "");
+        var apiKey = $("#ApiKey").val();
+        Stripe.setPublishableKey(apiKey);
     } else {
         $("#dPaymentInfo").css("display", "none");
     }
 }
 
 $(document).ready(function () {
-    userCardCheck();
+    checkIfPaymentMethodNeeded();
+
     $("#PlanId").change(function () {
         var planId = $("#PlanId").val();
         var url = "/MyAccount/GetPlan";
@@ -47,10 +50,14 @@ $(document).ready(function () {
                     return;
                 }
 
-                $("#PlanCost").val(json.Cost);
-                $("#PlanCost").format()
+                $("#PlanCost").val("$" + json.Cost.toFixed(2));
                 $("#PlanMax").val(json.MaxClients);
-                $("#btnSave").prop("disabled", false);
+                var currentPlanId = $("#CurrentPlanId").val();
+                if (currentPlanId != planId) {
+                    $("#btnSave").prop("disabled", false);
+                } else {
+                    $("#btnSave").prop("disabled", true);
+                }
             },
             complete: function () {
                 $.unblockUI();
@@ -61,4 +68,34 @@ $(document).ready(function () {
         });
 
     });
+
+    $("#btnSave").on("click", function (e) {
+        var hasPaymentMethod = $("#HasPaymentMethod").val();
+        if (hasPaymentMethod === "True") return;
+        e.preventDefault();
+        e.stopPropagation();
+
+        Stripe.card.createToken({
+            number: $('#txtCardNumber').val(),
+            cvc: $('#txtCvc').val(),
+            exp_month: $('#txtExpiryMonth').val(),
+            exp_year: $('#txtExpiryYear').val()
+        }, stripeResponseHandler);
+    });
+
+    function stripeResponseHandler(status, response) {
+        var $form = $("#updatePlan");
+
+        if (response.error) {
+            // Show the errors on the form
+            alert(response.error.message);
+        } else {
+            // response contains id and card, which contains additional card details
+            var token = response.id;
+            // Insert the token into the form so it gets submitted to the server
+            $("#Token").val(token);
+            // and submit
+            $form.get(0).submit();
+        }
+    }
 });

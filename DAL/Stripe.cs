@@ -45,7 +45,7 @@ namespace DAL
 
         public static void UpdatePlan(string customerId, string subscriptionId, string planId, StripeToken token = null)
         {
-            //TODO accept the token, optional parameter
+            //TODO accept the token, optional parameter, DONT NEED TOKEN, INSTEAD TAKE TOKEN IN CREATE CARD METHOD
             //TODO don't return void, everything needs to be in try/catch
             var subscriptionService = new StripeSubscriptionService{ ApiKey = ConfigurationManager.AppSettings["StripeApiKey"] };
             var subscriptionOptions = new StripeSubscriptionUpdateOptions();
