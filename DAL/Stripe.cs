@@ -8,7 +8,7 @@ using Stripe;
 
 namespace DAL
 {
-    public class Stripe
+    public class StripeService
     {
         public static StripeResult CreateCustomer(string userName, string email, string planId)
         {
@@ -28,6 +28,34 @@ namespace DAL
             {
                 return new StripeResult { Error = exception.Message };
             }
+        }
+
+        public static StripeCustomer GetCustomer(string customerId)
+        {
+            //TODO need to do try catch here?
+            var customerService = new StripeCustomerService { ApiKey = ConfigurationManager.AppSettings["StripeApiKey"] };
+            return customerService.Get(customerId);
+        }
+
+        public static List<StripePlan> GetPlans()
+        {
+            var planService = new StripePlanService { ApiKey = ConfigurationManager.AppSettings["StripeApiKey"] };
+            return planService.List().ToList(); // optional StripeListOptions
+        }
+
+        public static void UpdatePlan(string customerId, string subscriptionId, string planId, StripeToken token = null)
+        {
+            //TODO accept the token, optional parameter
+            //TODO don't return void, everything needs to be in try/catch
+            var subscriptionService = new StripeSubscriptionService{ ApiKey = ConfigurationManager.AppSettings["StripeApiKey"] };
+            var subscriptionOptions = new StripeSubscriptionUpdateOptions();
+            if (token != null)
+            {
+                subscriptionOptions.Card = new StripeCreditCardOptions{TokenId = token.Id};
+            }
+            subscriptionOptions.PlanId = planId;
+            //TODO customer has no attached payment source!!!
+            StripeSubscription stripeSubscription = subscriptionService.Update(customerId, subscriptionId, subscriptionOptions);
         }
     }
 

@@ -59,6 +59,7 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PetaPoco.cs" />
+    <Compile Include="Plan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stripe.cs" />
   </ItemGroup>

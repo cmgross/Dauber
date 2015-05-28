@@ -18,9 +18,14 @@ namespace DAL
         public bool Active { get; set; }
         public bool Admin { get; set; }
         public int CoachId { get; set; }
+        public string PlanId { get; set; }
+        public string StripeCustomerId { get; set; }
 
         [Ignore]
         public List<Client> Clients { get; set; }
+
+        [Ignore]
+        public Plan Plan { get; set; }
 
         public Coach()
         {
@@ -45,41 +50,36 @@ namespace DAL
             }
         }
 
-        public static Coach Get(string userName)
+
+        private static Coach GetCoach(string query)
         {
-            userName = UserNameHelper(userName);
             using (var db = new Database("DauberDB"))
             {
-                var query = String.Format("SELECT * FROM AspNetUsers WHERE UserName='{0}'", userName);
                 var coach = db.SingleOrDefault<Coach>(query);
                 var clientsQuery = String.Format("SELECT * FROM Clients WHERE UserId='{0}'", coach.Id);
                 coach.Clients = db.Fetch<Client>(clientsQuery);
+                var planQuery = String.Format("SELECT * FROM Plans WHERE Id='{0}'", coach.PlanId);
+                coach.Plan = db.SingleOrDefault<Plan>(planQuery);
                 return coach;
             }
+        }
+        public static Coach Get(string userName)
+        {
+            userName = UserNameHelper(userName);
+            var query = String.Format("SELECT * FROM AspNetUsers WHERE UserName='{0}'", userName);
+            return GetCoach(query);
         }
 
         public static Coach Get(int coachId)
         {
-            using (var db = new Database("DauberDB"))
-            {
-                var query = String.Format("SELECT * FROM AspNetUsers WHERE CoachId={0}", coachId);
-                var coach = db.SingleOrDefault<Coach>(query);
-                var clientsQuery = String.Format("SELECT * FROM Clients WHERE UserId='{0}'", coach.Id);
-                coach.Clients = db.Fetch<Client>(clientsQuery);
-                return coach;
-            }
+            var query = String.Format("SELECT * FROM AspNetUsers WHERE CoachId={0}", coachId);
+            return GetCoach(query);
         }
 
         public static Coach GetCoachById(string guid)
         {
-            using (var db = new Database("DauberDB"))
-            {
-                var query = String.Format("SELECT * FROM AspNetUsers WHERE Id='{0}'", guid);
-                var coach = db.SingleOrDefault<Coach>(query);
-                var clientsQuery = String.Format("SELECT * FROM Clients WHERE UserId='{0}'", coach.Id);
-                coach.Clients = db.Fetch<Client>(clientsQuery);
-                return coach;
-            }
+            var query = String.Format("SELECT * FROM AspNetUsers WHERE Id='{0}'", guid);
+            return GetCoach(query);
         }
 
 //        public static Coach GetCoachAndClients(string userName)

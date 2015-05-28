@@ -370,7 +370,7 @@ namespace Dauber.Controllers
                     return View("ExternalLoginFailure");
                 }
                 //email confirmed is true because we are only allowing Google login
-                var stripeResult = Stripe.CreateCustomer(info.DefaultUserName, model.Email, "free");
+                var stripeResult = StripeService.CreateCustomer(info.DefaultUserName, model.Email, "free");
                 IdentityResult result = new IdentityResult();
                 if (stripeResult.Success)
                 {

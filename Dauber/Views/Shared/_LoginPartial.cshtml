@@ -8,9 +8,16 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @*@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
+                @Html.ActionLink("Plans", "Index", "Clients")
+            </li>
+            @*@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
+            <li>
                 @Html.ActionLink("Clients", "Index", "Clients")
             </li>
+            <li>
+                @Html.ActionLink("My Account", "Index", "MyAccount")
+            </li>
+
             @if (Cacheable.IsAdmin(User.Identity.Name))
             {
                 <li>
@@ -24,6 +31,7 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Plans", "Index", "Clients")</li>
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }
