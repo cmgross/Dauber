@@ -5,9 +5,7 @@
 function checkIfPaymentMethodNeeded() {
     var hasPaymentMethod = $("#HasPaymentMethod").val();
     if (hasPaymentMethod === "False") {
-        $("#dPaymentInfo").css("display", "");
-        var apiKey = $("#ApiKey").val();
-        Stripe.setPublishableKey(apiKey);
+        $("#dPaymentInfo").css("display", ""); 
     } else {
         $("#dPaymentInfo").css("display", "none");
     }
@@ -66,20 +64,22 @@ $(document).ready(function () {
                 alert(status);
             }
         });
-
     });
 
     $("#btnSave").on("click", function (e) {
         var hasPaymentMethod = $("#HasPaymentMethod").val();
         if (hasPaymentMethod === "True") return;
+        $("#btnSave").prop("disabled", true);
         e.preventDefault();
         e.stopPropagation();
-
+        var apiKey = $("#ApiKey").val();
+        Stripe.setPublishableKey(apiKey);
         Stripe.card.createToken({
-            number: $('#txtCardNumber').val(),
-            cvc: $('#txtCvc').val(),
-            exp_month: $('#txtExpiryMonth').val(),
-            exp_year: $('#txtExpiryYear').val()
+            number: $("#txtCardNumber").val(),
+            cvc: $("#txtCvc").val(),
+            exp_month: $("#txtExpiryMonth").val(),
+            exp_year: $("#txtExpiryYear").val(),
+            name: $("#UserName").val()
         }, stripeResponseHandler);
     });
 
@@ -89,6 +89,7 @@ $(document).ready(function () {
         if (response.error) {
             // Show the errors on the form
             alert(response.error.message);
+            $("#btnSave").prop("disabled", false);
         } else {
             // response contains id and card, which contains additional card details
             var token = response.id;

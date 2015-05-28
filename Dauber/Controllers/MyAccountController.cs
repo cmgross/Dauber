@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Dauber.Models;
+using DAL;
 using Newtonsoft.Json;
 
 
@@ -28,14 +29,29 @@ namespace Dauber.Controllers
         [HttpPost]
         public ActionResult UpdatePlan(MyAccountUpdatePlanSubmisionViewModel model)
         {
-            //TODO http://stackoverflow.com/questions/8757963/avoiding-duplicate-form-submission-in-asp-net-mvc-by-clicking-submit-twice
-            //TODO add card to customer StripeService.CreateCard(model.CustomerId, model.Token, model.username is Cardholder)
-            //TODO update user plan 
-            //TODO StripeService.UpdatePlan(CustomerId, what, "mithril");
-            //TODO update user in local db to have a different plan
-            //TODO try catch, error handling
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    StripeService.CreateCard(model.Token, model.CustomerId);//returns true
+                    StripeService.UpdatePlan(model.CustomerId, model.SubscriptionId, model.PlanId);
+                    Coach.UpdatePlan(model.CoachId, model.PlanId);
+                    return RedirectToAction("Index", "MyAccount");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Error = ex.Message;
+                    return View("Error");
+                }
+            }
+            //TODO change Stripe.cs methods from void to StripeResult and handle them in this form
+            //TODO add blockUI around submitting form, creating token, etc
+            //TODO pretty up stripe CC form by looking at Stripe examples
             //TODO validation of cc info using https://stripe.com/docs/stripe.js
-            return View();
+            //TODO maybe validation via https://stripe.com/blog/jquery-payment https://stripe.com/docs/tutorials/forms
+            //TODO Update Card page/action via API https://github.com/jaymedavis/stripe.net
+            ViewBag.Error = "This submission could not be accepted as a required field was missing";
+            return View("Error");
         }
 
         [HttpGet]

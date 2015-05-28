@@ -32,7 +32,6 @@ namespace DAL
 
         public static StripeCustomer GetCustomer(string customerId)
         {
-            //TODO need to do try catch here?
             var customerService = new StripeCustomerService { ApiKey = ConfigurationManager.AppSettings["StripeApiKey"] };
             return customerService.Get(customerId);
         }
@@ -43,19 +42,25 @@ namespace DAL
             return planService.List().ToList(); // optional StripeListOptions
         }
 
-        public static void UpdatePlan(string customerId, string subscriptionId, string planId, StripeToken token = null)
+        public static void UpdatePlan(string customerId, string subscriptionId, string planId)
         {
-            //TODO accept the token, optional parameter, DONT NEED TOKEN, INSTEAD TAKE TOKEN IN CREATE CARD METHOD
-            //TODO don't return void, everything needs to be in try/catch
-            var subscriptionService = new StripeSubscriptionService{ ApiKey = ConfigurationManager.AppSettings["StripeApiKey"] };
-            var subscriptionOptions = new StripeSubscriptionUpdateOptions();
-            if (token != null)
-            {
-                subscriptionOptions.Card = new StripeCreditCardOptions{TokenId = token.Id};
-            }
-            subscriptionOptions.PlanId = planId;
-            //TODO customer has no attached payment source!!!
+            var subscriptionService = new StripeSubscriptionService { ApiKey = ConfigurationManager.AppSettings["StripeApiKey"] };
+            var subscriptionOptions = new StripeSubscriptionUpdateOptions {PlanId = planId};
             StripeSubscription stripeSubscription = subscriptionService.Update(customerId, subscriptionId, subscriptionOptions);
+        }
+
+        public static void CreateCard(string token, string customerId)
+        {
+            var myCard = new StripeCardCreateOptions
+            {
+                Card = new StripeCreditCardOptions
+                {
+                    TokenId = token
+                }
+            };
+
+            var cardService = new StripeCardService();
+            StripeCard stripeCard = cardService.Create(customerId, myCard);
         }
     }
 

@@ -113,12 +113,22 @@ namespace DAL
             }
         }
 
+        public static void UpdatePlan(string coachId, string planId)
+        {
+            using (var db = new Database("DauberDB"))
+            {
+                var query = String.Format("UPDATE AspNetUsers SET PlanId = '{0}' WHERE CoachId={1}", planId, coachId);
+                db.Execute(query);
+            }
+        }
+
         private static string UserNameHelper(string userName)
         {
             int index = userName.IndexOf("@");
             userName = userName.Insert(index + "@".Length, "@");
             return userName;
         }
+
     }
 
     public class CoachToClientRelator

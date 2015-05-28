@@ -13,3 +13,4 @@ C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\DAL\bin\Debug\Newton
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\DAL\bin\Debug\Stripe.net.dll
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\DAL\bin\Debug\Newtonsoft.Json.xml
 C:\VS\Visual Studio 2013\Projects\Dauber\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
