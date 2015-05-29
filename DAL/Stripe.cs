@@ -42,25 +42,42 @@ namespace DAL
             return planService.List().ToList(); // optional StripeListOptions
         }
 
-        public static void UpdatePlan(string customerId, string subscriptionId, string planId)
+        public static StripeResult UpdatePlan(string customerId, string subscriptionId, string planId)
         {
-            var subscriptionService = new StripeSubscriptionService { ApiKey = ConfigurationManager.AppSettings["StripeApiKey"] };
-            var subscriptionOptions = new StripeSubscriptionUpdateOptions {PlanId = planId};
-            StripeSubscription stripeSubscription = subscriptionService.Update(customerId, subscriptionId, subscriptionOptions);
+            try
+            {
+                var subscriptionService = new StripeSubscriptionService { ApiKey = ConfigurationManager.AppSettings["StripeApiKey"] };
+                var subscriptionOptions = new StripeSubscriptionUpdateOptions { PlanId = planId };
+                StripeSubscription stripeSubscription = subscriptionService.Update(customerId, subscriptionId, subscriptionOptions);
+                return new StripeResult { Success = true, Error = string.Empty };
+            }
+            catch (StripeException exception)
+            {
+                return new StripeResult { Error = exception.Message };
+            }
+
         }
 
-        public static void CreateCard(string token, string customerId)
+        public static StripeResult CreateCard(string token, string customerId)
         {
-            var myCard = new StripeCardCreateOptions
+            try
             {
-                Card = new StripeCreditCardOptions
+                var myCard = new StripeCardCreateOptions
                 {
-                    TokenId = token
-                }
-            };
+                    Card = new StripeCreditCardOptions
+                    {
+                        TokenId = token
+                    }
+                };
 
-            var cardService = new StripeCardService();
-            StripeCard stripeCard = cardService.Create(customerId, myCard);
+                var cardService = new StripeCardService();
+                StripeCard stripeCard = cardService.Create(customerId, myCard);
+                return new StripeResult { Success = true, Error = string.Empty };
+            }
+            catch (StripeException exception)
+            {
+                return new StripeResult { Error = exception.Message };
+            }
         }
     }
 

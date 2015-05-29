@@ -204,3 +204,4 @@ C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\obj\Debug\Dau
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\obj\Debug\Dauber.pdb
 C:\VS\Visual Studio 2013\Projects\Dauber\Dauber\bin\Stripe.net.dll
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\bin\Stripe.net.dll
+C:\VS\Visual Studio 2013\Projects\Dauber\Dauber\bin\DataAnnotationsExtensions.dll

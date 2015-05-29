@@ -33,8 +33,24 @@ namespace Dauber.Controllers
             {
                 try
                 {
-                    StripeService.CreateCard(model.Token, model.CustomerId);//returns true
-                    StripeService.UpdatePlan(model.CustomerId, model.SubscriptionId, model.PlanId);
+                    if (model.Token != null)
+                    {
+                        var cardResult = StripeService.CreateCard(model.Token, model.CustomerId);
+                        if (!cardResult.Success)
+                        {
+                            ViewBag.Error = cardResult.Error;
+                            return View("Error");
+                        }
+                    }
+
+
+                    var planResult = StripeService.UpdatePlan(model.CustomerId, model.SubscriptionId, model.PlanId);
+                    if (!planResult.Success)
+                    {
+                        ViewBag.Error = planResult.Error;
+                        return View("Error");
+                    }
+
                     Coach.UpdatePlan(model.CoachId, model.PlanId);
                     return RedirectToAction("Index", "MyAccount");
                 }
@@ -44,12 +60,8 @@ namespace Dauber.Controllers
                     return View("Error");
                 }
             }
-            //TODO change Stripe.cs methods from void to StripeResult and handle them in this form
-            //TODO add blockUI around submitting form, creating token, etc
-            //TODO pretty up stripe CC form by looking at Stripe examples
-            //TODO validation of cc info using https://stripe.com/docs/stripe.js
-            //TODO maybe validation via https://stripe.com/blog/jquery-payment https://stripe.com/docs/tutorials/forms
-            //TODO Update Card page/action via API https://github.com/jaymedavis/stripe.net
+            //TODO delete card from cmgst40 retest creating it
+            //TODO Update Card page/action via API https://github.com/jaymedavis/stripe.net, no card on file? Say so. Ask to add one? or just mention card will be added when changing plan
             ViewBag.Error = "This submission could not be accepted as a required field was missing";
             return View("Error");
         }
@@ -65,7 +77,7 @@ namespace Dauber.Controllers
         [HttpGet]
         public JsonResult GetPlan(string planId)
         {
-            var plan = DAL.Plan.Get(planId);
+            var plan = Plan.Get(planId);
             var result = new JsonResult
             {
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet,

@@ -5,51 +5,53 @@
 }
 
 <h3>Update Plan</h3>
-<br />
+
 <div id="dPaymentInfo" style="display: none;">
-    <h4>Payment Information</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            <label for="txtCardNumber">Card Number *</label>
-        </dt>
+    @using (Html.BeginForm(new { id = "cardInfo" }))
+    {
+        <div class="form-horizontal">
+            <h4>Payment Information</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.CardInfoViewModel.CreditCardNumber, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.CardInfoViewModel.CreditCardNumber, new { @class = "form-control", style = "width:200px", @maxlength = "16", @placeholder = "Card Number e.g 1234...", Value = "" })
+                    @Html.ValidationMessageFor(model => model.CardInfoViewModel.CreditCardNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CardInfoViewModel.Cvc, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.CardInfoViewModel.Cvc, new { @class = "form-control", style = "width:100px", @maxlength = "3", @placeholder = "e.g 987", Value = "" })
+                    @Html.ValidationMessageFor(model => model.CardInfoViewModel.Cvc, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CardInfoViewModel.ExpiryMonth, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.CardInfoViewModel.ExpiryMonth, Model.CardInfoViewModel.ExpiryMonths, new { @class = "form-control", style = "width:100px" })
+                    @Html.ValidationMessageFor(model => model.CardInfoViewModel.ExpiryMonth, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CardInfoViewModel.ExpiryYear, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.CardInfoViewModel.ExpiryYear, Model.CardInfoViewModel.ExpiryYears, new { @class = "form-control", style = "width:100px" })
+                    @Html.ValidationMessageFor(model => model.CardInfoViewModel.ExpiryYears, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <a href="https://stripe.com/about" target="_blank"><img src="~/Images/poweredbyStripe.png" /></a>
+                </div>
+            </div>
+        </div>
 
-        <dd>
-            <input type="text" name="CardNumber" id="txtCardNumber" placeholder="Card Number e.g 1234..." value="4242424242424242" />
-        </dd>
-
-        <dt>
-            <label for="txtCvc">Cvc *</label>
-        </dt>
-
-        <dd>
-            <input type="text" name="Cvc" id="txtCvc" placeholder="Security Code e.g 987" value="123" />
-        </dd>
-
-        <dt>
-            <label for="txtExpiryMonth">Expiry Month (MM) *</label>
-        </dt>
-
-        <dd>
-            <input type="text" name="ExpiryMonth" id="txtExpiryMonth" placeholder="01" value="12" />
-        </dd>
-
-        <dt>
-            <label for="txtExpiryYear">Expiry Year (YYYY) *</label>)
-        </dt>
-
-        <dd>
-            <input type="text" name="ExpiryYear" id="txtExpiryYear" placeholder="2015" value="2016" />
-        </dd>
-
-        <dt></dt>
-        <dd>
-            <br />
-            <a href="https://stripe.com/about" target="_blank"><img src="~/Images/poweredbyStripe.png" /></a>
-        </dd>
-    </dl>
+    }
+    <br /><br />
 </div>
-<br /><br />
 @Html.HiddenFor(m => m.HasPaymentMethod)
 @Html.HiddenFor(m => m.ApiKey)
 @Html.HiddenFor(m => m.CurrentPlanId)
@@ -85,10 +87,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.NumberOfClients, new {@class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.NumberOfClients, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.NumberOfClients, new {@class = "form-control", @readonly = "readonly", style = "width:100px"})
-                @Html.ValidationMessageFor(model => model.NumberOfClients, "", new {@class = "text-danger"})
+                @Html.TextBoxFor(model => model.NumberOfClients, new { @class = "form-control", @readonly = "readonly", style = "width:100px" })
+                @Html.ValidationMessageFor(model => model.NumberOfClients, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -104,10 +106,49 @@
         </div>
     </div>
 }
-
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     @Scripts.Render("~/bundles/PlanChange")
 }
+
+
+@*<dl class="dl-horizontal">
+        <dt>
+            <label for="txtCardNumber">Card Number</label>
+        </dt>
+
+        <dd>
+            <input type="text" name="CardNumber" id="txtCardNumber" placeholder="Card Number e.g 1234..." value="4242424242424242"/>
+        </dd>
+
+        <dt>
+            <label for="txtCvc">Cvc *</label>
+        </dt>
+
+        <dd>
+            <input type="text" name="Cvc" id="txtCvc" placeholder="Security Code e.g 987" value="123"/>
+        </dd>
+
+        <dt>
+            <label for="txtExpiryMonth">Expiry Month (MM) *</label>
+        </dt>
+
+        <dd>
+            <input type="text" name="ExpiryMonth" id="txtExpiryMonth" placeholder="01" value="12"/>
+        </dd>
+
+        <dt>
+            <label for="txtExpiryYear">Expiry Year (YYYY) *</label>)
+        </dt>
+
+        <dd>
+            <input type="text" name="ExpiryYear" id="txtExpiryYear" placeholder="2015" value="2016"/>
+        </dd>
+
+        <dt></dt>
+        <dd>
+            <br/>
+            <a href="https://stripe.com/about" target="_blank"><img src="~/Images/poweredbyStripe.png"/></a>
+        </dd>
+    </dl>*@

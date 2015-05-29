@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DataAnnotationsExtensions;
 using DAL;
 
 
@@ -49,7 +50,7 @@ namespace Dauber.Models
         public string UserName { get; set; }
         public string SubscriptionId { get; set; }
         public string CurrentPlanId { get; set; }
-
+        public MyAccountCardInfoViewModel CardInfoViewModel { get; set; }
 
         public MyAccountUpdatePlanViewModel() { }
         public MyAccountUpdatePlanViewModel(string userName)
@@ -76,23 +77,63 @@ namespace Dauber.Models
             NumberOfClients = coach.Clients.Count;
             ApiKey = ConfigurationManager.AppSettings["StripeApiKeyPublic"];
             SubscriptionId = customer.StripeSubscriptionList.StripeSubscriptions[0].Id;
+            CardInfoViewModel = new MyAccountCardInfoViewModel();
         }
     }
 
+    public class MyAccountCardInfoViewModel
+    {
+        [StringLength(16, MinimumLength = 12, ErrorMessage = "Credit card numbers must be 12-16 digits")]
+        [DataAnnotationsExtensions.CreditCard]
+        [Digits]
+        [Required]
+        [Display(Name = "Card Number")]
+        public int CreditCardNumber { get; set; }
+        [StringLength(3, MinimumLength = 3, ErrorMessage = "CVC must be 3 digits")]
+        [Required]
+        public int Cvc { get; set; }
+        [Required]
+        [Display(Name = "Expiry Month")]
+        public string ExpiryMonth { get; set; }
+        [Required]
+        [Year]
+        [Display(Name = "Expiry Year")]
+        public string ExpiryYear { get; set; }
+        public List<SelectListItem> ExpiryYears { get; set; }
+        public List<SelectListItem> ExpiryMonths { get; set; }
+
+        public MyAccountCardInfoViewModel()
+        {
+            var years = Enumerable.Range(DateTime.Now.Year, 15);
+            ExpiryYears = years.Select(y => new SelectListItem
+            {
+                Text = y.ToString(),
+                Value = y.ToString(),
+                Selected = y.ToString() == DateTime.Now.Year.ToString()
+            }).ToList();
+            
+            var months = Enumerable.Range(1, 12);
+            ExpiryMonths = months.Select(m => new SelectListItem
+            {
+                Text = m.ToString(),
+                Value = m.ToString(),
+                Selected = m.ToString() == "12"
+            }).ToList();
+        }
+    }
     public class MyAccountUpdatePlanSubmisionViewModel
     {
-        [Required]
-        public string Token { get; set; } //to process charge we need a token,  and a username
+        public string Token { get; set; }
         [Required]
         public string UserName { get; set; }
         [Required]
-        public string PlanId { get; set; }//to update user's plan and charge it, we need planId, customerId, subscription Id
+        public string PlanId { get; set; }
         [Required]
         public string CustomerId { get; set; }
         [Required]
         public string SubscriptionId { get; set; }
         [Required]
-        public string CoachId { get; set; } //to update a user in dauber, we need a planId, and coachId
+        public string CoachId { get; set; }
 
     }
 }
