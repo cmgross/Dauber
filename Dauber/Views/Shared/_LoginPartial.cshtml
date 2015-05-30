@@ -8,7 +8,7 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("Plans", "Index", "Clients")
+                @Html.ActionLink("Plans", "Index", "Plans")
             </li>
             @*@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
             <li>
@@ -31,7 +31,7 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Plans", "Index", "Clients")</li>
+        <li>@Html.ActionLink("Plans", "Index", "Plans")</li>
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }

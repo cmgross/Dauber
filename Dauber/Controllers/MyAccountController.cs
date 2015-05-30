@@ -43,7 +43,6 @@ namespace Dauber.Controllers
                         }
                     }
 
-
                     var planResult = StripeService.UpdatePlan(model.CustomerId, model.SubscriptionId, model.PlanId);
                     if (!planResult.Success)
                     {
@@ -60,7 +59,8 @@ namespace Dauber.Controllers
                     return View("Error");
                 }
             }
-            //TODO delete card from cmgst40 retest creating it
+            //TODO for limiting number of clients being added
+            //TODO review notes to see if I missed anything
             //TODO Update Card page/action via API https://github.com/jaymedavis/stripe.net, no card on file? Say so. Ask to add one? or just mention card will be added when changing plan
             ViewBag.Error = "This submission could not be accepted as a required field was missing";
             return View("Error");

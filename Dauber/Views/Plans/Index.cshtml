@@ -1,0 +1,80 @@
+﻿@*@section HeadSection{
+       @Styles.Render("~/Content/plans")
+        http://bootsnipp.com/snippets/featured/pricing-table-bs-3
+    }*@
+
+@{
+    ViewBag.Title = "Plans";
+}
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 col-md-3">
+            <div class="well">
+                <h2 class="text-muted">Free</h2>
+                <p><span class="label label-default">Default Plan</span></p>
+                <ul>
+                    <li>Up to 10 clients</li>
+                    <li>Limited support</li>
+                </ul>
+                @*<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.</p>*@
+                <hr>
+                <h3>$0 / month</h3>
+                <hr>
+                <p><input type="button" class="btn btn-default btn-sm" value="Select Plan" onclick="location.href = '@Url.Action("UpdatePlan", "MyAccount")'" /></p>
+            </div>
+        </div>
+        <div class="col-sm-3 col-md-3">
+            <div class="well">
+                <h2 class="text-success">Mithril</h2>
+                <p><span class="label label-success">POPULAR</span></p>
+                <ul>
+                    <li>Up to 50 clients</li>
+                    <li>Unlimited support</li>
+                </ul>
+                @*<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.</p>*@
+                <hr>
+                <h3>$50 / month</h3>
+                <hr>
+                <p>
+                    <input type="button" class="btn btn-success btn-sm" value="Select Plan" onclick="location.href = '@Url.Action("UpdatePlan", "MyAccount")'" />
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-3 col-md-3">
+            <div class="well">
+                <h2 class="text-success">Mithril</h2>
+                <p><span class="label label-success">POPULAR</span></p>
+                <ul>
+                    <li>Up to 50 clients</li>
+                    <li>Unlimited support</li>
+                </ul>
+                @*<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.</p>*@
+                <hr>
+                <h3>$50 / month</h3>
+                <hr>
+                <p>
+                    <input type="button" class="btn btn-success btn-sm" value="Select Plan" onclick="location.href = '@Url.Action("UpdatePlan", "MyAccount")'" />
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-3 col-md-3">
+            <div class="well">
+                <h2 class="text-success">Mithril</h2>
+                <p><span class="label label-success">POPULAR</span></p>
+                <ul>
+                    <li>Up to 50 clients</li>
+                    <li>Unlimited support</li>
+                </ul>
+                @*<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.</p>*@
+                <hr>
+                <h3>$50 / month</h3>
+                <hr>
+                <p>
+                    <input type="button" class="btn btn-success btn-sm" value="Select Plan" onclick="location.href = '@Url.Action("UpdatePlan", "MyAccount")'" />
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -134,11 +134,14 @@ C:\VS\Visual Studio 2013\Projects\Dauber\Dauber\bin\HtmlAgilityPack.pdb
 C:\VS\Visual Studio 2013\Projects\Dauber\Dauber\bin\HtmlAgilityPack.xml
 C:\VS\Visual Studio 2013\Projects\Dauber\Dauber\obj\Debug\Dauber.dll
 C:\VS\Visual Studio 2013\Projects\Dauber\Dauber\obj\Debug\Dauber.pdb
+C:\VS\Visual Studio 2013\Projects\Dauber\Dauber\bin\Stripe.net.dll
+C:\VS\Visual Studio 2013\Projects\Dauber\Dauber\bin\DataAnnotationsExtensions.dll
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\bin\Dauber.dll.config
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\bin\Dauber.dll
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\bin\Dauber.pdb
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\bin\Antlr3.Runtime.dll
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\bin\DAL.dll
+C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\bin\DataAnnotationsExtensions.dll
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\bin\EntityFramework.dll
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\bin\EntityFramework.SqlServer.dll
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\bin\MFP.dll
@@ -157,6 +160,7 @@ C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\bin\Microsoft
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\bin\Newtonsoft.Json.dll
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\bin\Owin.dll
+C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\bin\Stripe.net.dll
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\bin\System.Net.Http.Formatting.dll
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\bin\System.Web.Helpers.dll
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\bin\System.Web.Http.dll
@@ -202,6 +206,3 @@ C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\bin\HtmlAgili
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\obj\Debug\Dauber.csprojResolveAssemblyReference.cache
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\obj\Debug\Dauber.dll
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\obj\Debug\Dauber.pdb
-C:\VS\Visual Studio 2013\Projects\Dauber\Dauber\bin\Stripe.net.dll
-C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\bin\Stripe.net.dll
-C:\VS\Visual Studio 2013\Projects\Dauber\Dauber\bin\DataAnnotationsExtensions.dll

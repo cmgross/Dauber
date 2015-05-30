@@ -7,7 +7,9 @@ using System.Web.Mvc;
 namespace Dauber.Controllers
 {
     [Attributes.RequireHttps]
-    public class HomeController : Controller
+    //[AllowAnonymous]
+    //[OverrideAuthentication]
+    public class PlansController : Controller
     {
         [HttpGet]
         public ActionResult Index()

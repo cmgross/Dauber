@@ -203,6 +203,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MyAccountController.cs" />
+    <Compile Include="Controllers\PlansController.cs" />
     <Compile Include="Controllers\v1\DiaryController.cs" />
     <Compile Include="Controllers\v2\DiaryController.cs" />
     <Compile Include="Global.asax.cs">
@@ -303,6 +304,7 @@
     <Content Include="Views\Clients\Edit.cshtml" />
     <Content Include="Views\MyAccount\Index.cshtml" />
     <Content Include="Views\MyAccount\UpdatePlan.cshtml" />
+    <Content Include="Views\Plans\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -20,6 +20,8 @@ namespace Dauber.Models
         public int CurrentClients { get; set; }
         [Display(Name = "Max Clients")]
         public int MaxClients { get; set; }
+        [Display(Name = "Card On File")]
+        public bool HasCardOnFile { get; set; }
 
         public MyAccountIndexViewModel() { }
 
@@ -30,6 +32,8 @@ namespace Dauber.Models
             PlanDescription = coach.Plan.Name;
             MaxClients = coach.Plan.MaxClients;
             CurrentClients = coach.Clients.Count;
+            var customer = StripeService.GetCustomer(coach.StripeCustomerId);
+            HasCardOnFile = customer.StripeCardList.TotalCount > 0;
         }
     }
     public class MyAccountUpdatePlanViewModel
