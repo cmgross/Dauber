@@ -11,13 +11,18 @@ namespace Dauber.Models
     {
         public bool IsAvailable { get; set; }
         public bool IsPublic { get; set; }
+        public int MaxClientsForPlan { get; set; }
+        public int CurrentClientsCount { get; set; }
 
         public NewClientDiaryViewModel() { }
 
-        public NewClientDiaryViewModel(string clientUserName)
+        public NewClientDiaryViewModel(string clientUserName, string userId)
         {
             IsAvailable = !Client.AnyClientMatches(clientUserName);
             IsPublic = Scrape.IsPublic(clientUserName);
+            var coach = Coach.GetCoachById(userId);
+            MaxClientsForPlan = coach.Plan.MaxClients;
+            CurrentClientsCount = coach.Clients.Count;
         }
     }
 

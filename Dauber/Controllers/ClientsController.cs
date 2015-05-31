@@ -114,7 +114,7 @@ namespace Dauber.Controllers
             switch (clientAction)
             {
                 case "Add":
-                    var newClientDiaryViewModel = new NewClientDiaryViewModel(clientUserName);
+                    var newClientDiaryViewModel = new NewClientDiaryViewModel(clientUserName, userId);
                     result.Data = JsonConvert.SerializeObject(newClientDiaryViewModel);
                     break;
                 case "Edit":

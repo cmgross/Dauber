@@ -59,8 +59,7 @@ namespace Dauber.Controllers
                     return View("Error");
                 }
             }
-            //TODO for limiting number of clients being added
-            //TODO review notes to see if I missed anything
+            //TODO for limiting number of clients being added in clientsIndex.js, add only method, see how many clients coach has, and what the max is for their plan (class for this, returned from JSON method)
             //TODO Update Card page/action via API https://github.com/jaymedavis/stripe.net, no card on file? Say so. Ask to add one? or just mention card will be added when changing plan
             ViewBag.Error = "This submission could not be accepted as a required field was missing";
             return View("Error");
