@@ -52,5 +52,8 @@
 </div>
 <p>
     <input type="button" class="btn btn-primary btn-sm" value="Change Plan" onclick="location.href = '@Url.Action("UpdatePlan", "MyAccount")'"/>
-    <input type="button" class="btn btn-default btn-sm" value="Update Card" onclick="location.hrer ='@Url.Action("UpdateCard", "MyAccount")'"/>
+    @if (Model.HasCardOnFile)
+    {
+        <input type="button" class="btn btn-default btn-sm" value="Update Card" onclick="location.href ='@Url.Action("UpdateCard", "MyAccount")'" />
+    }
 </p>

@@ -62,7 +62,8 @@ namespace Dauber.Controllers
             //TODO Add new card with new expiration 
             //TODO http://stackoverflow.com/questions/20065939/change-credit-card-information-stripe
             //TODO Update Card page/action via API https://github.com/jaymedavis/stripe.net,
-            //TODO testimonials page
+            //TODO testimonials page http://bootsnipp.com/snippets/featured/responsive-quote-carousel //should i write/store interface for testimonials or just hard code them?
+            //TODO switch plans page to be dynamic rather than static?
             ViewBag.Error = "This submission could not be accepted as a required field was missing";
             return View("Error");
         }
