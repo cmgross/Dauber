@@ -38,6 +38,9 @@ namespace Dauber
 
             bundles.Add(new ScriptBundle("~/bundles/PlanChange").Include(
              "~/Scripts/planChange.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/CardChange").Include(
+           "~/Scripts/cardChange.js"));
         }
     }
 }

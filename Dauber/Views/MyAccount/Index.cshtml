@@ -5,7 +5,6 @@
 }
 
 <h3>My Account</h3>
-
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -40,20 +39,61 @@
         <dd>
             @Html.DisplayFor(model => model.MaxClients)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.HasCardOnFile)
+            &nbsp;
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.HasCardOnFile)
+            &nbsp;
+        </dd>
+        <dt>
+            &nbsp;
+        </dt>
+        <dd>
+            <input type="button" class="btn btn-success btn-xs" value="Change Plan" onclick="location.href='@Url.Action("UpdatePlan", "MyAccount")' " />
         </dd>
     </dl>
 </div>
-<p>
-    <input type="button" class="btn btn-primary btn-sm" value="Change Plan" onclick="location.href = '@Url.Action("UpdatePlan", "MyAccount")'"/>
-    @if (Model.HasCardOnFile)
-    {
-        <input type="button" class="btn btn-default btn-sm" value="Update Card" onclick="location.href ='@Url.Action("UpdateCard", "MyAccount")'" />
-    }
-</p>
+
+@if (Model.HasCardOnFile)
+{
+    <br/>
+    <h4>Payment Method</h4>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.CardType)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CardType)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CardNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CardNumber)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ExpirationDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ExpirationDate)
+            </dd>
+            <dt>
+                &nbsp;
+            </dt>
+            <dd>
+                &nbsp;
+            </dd>
+            <dt>
+                &nbsp;
+            </dt>
+            <dd>
+                <input type="button" class="btn btn-warning btn-xs" value="Update Card" onclick="location.href ='@Url.Action("UpdateCard", "MyAccount")'" />
+            </dd>
+        </dl>
+    </div>
+}

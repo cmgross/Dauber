@@ -22,6 +22,12 @@ namespace Dauber.Models
         public int MaxClients { get; set; }
         [Display(Name = "Card On File")]
         public bool HasCardOnFile { get; set; }
+        [Display(Name = "Card Type")]
+        public string CardType { get; set; }
+        [Display(Name = "Card Number")]
+        public string CardNumber { get; set; }
+        [Display(Name = "Expiration Date")]
+        public string ExpirationDate { get; set; }
 
         public MyAccountIndexViewModel() { }
 
@@ -34,6 +40,11 @@ namespace Dauber.Models
             CurrentClients = coach.Clients.Count;
             var customer = StripeService.GetCustomer(coach.StripeCustomerId);
             HasCardOnFile = customer.StripeCardList.TotalCount > 0;
+            if (customer.StripeCardList.TotalCount == 0) return;
+            var card = customer.StripeCardList.StripeCards[0];
+            CardType = card.Brand;
+            CardNumber = "************" + card.Last4;
+            ExpirationDate = card.ExpirationMonth + "/" + card.ExpirationYear;
         }
     }
     public class MyAccountUpdatePlanViewModel
@@ -115,7 +126,7 @@ namespace Dauber.Models
                 Value = y.ToString(),
                 Selected = y.ToString() == DateTime.Now.Year.ToString()
             }).ToList();
-            
+
             var months = Enumerable.Range(1, 12);
             ExpiryMonths = months.Select(m => new SelectListItem
             {
@@ -139,5 +150,43 @@ namespace Dauber.Models
         [Required]
         public string CoachId { get; set; }
 
+    }
+
+    public class MyAccountUpdateCardViewModel
+    {
+        public bool HasPaymentMethod { get; set; }
+        public string CustomerId { get; set; }
+        public int CoachId { get; set; }
+        public string CardId { get; set; }
+        public MyAccountCardInfoViewModel CardInfoViewModel { get; set; }
+        public string ApiKey { get; set; }
+        public string UserName { get; set; }
+
+        public MyAccountUpdateCardViewModel(string userName)
+        {
+            var coach = Coach.Get(userName);
+            var customer = StripeService.GetCustomer(coach.StripeCustomerId);
+            CardInfoViewModel = new MyAccountCardInfoViewModel();
+            ApiKey = ConfigurationManager.AppSettings["StripeApiKeyPublic"];
+            UserName = coach.UserName;
+            HasPaymentMethod = customer.StripeCardList.TotalCount > 0;
+            CoachId = coach.CoachId;
+            CustomerId = customer.Id;
+            if (customer.StripeCardList.TotalCount == 0) return;
+            CardId = customer.StripeCardList.StripeCards[0].Id;
+        }
+    }
+
+    public class MyAccountUpdateCardSubmissionViewModel
+    {
+        public string Token { get; set; }
+        [Required]
+        public string CustomerId { get; set; }
+        [Required]
+        public string CardId { get; set; }
+        [Required]
+        public string CoachId { get; set; }
+        [Required]
+        public bool HasPaymentMethod { get; set; }
     }
 }

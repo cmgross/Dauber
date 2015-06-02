@@ -5,9 +5,11 @@
 function checkIfPaymentMethodNeeded() {
     var hasPaymentMethod = $("#HasPaymentMethod").val();
     if (hasPaymentMethod === "False") {
-        $("#dPaymentInfo").css("display", ""); 
+        $("#dPaymentInfo").css("display", "");
+        $("#btnSave").prop("disabled", false);
     } else {
         $("#dPaymentInfo").css("display", "none");
+        $("#btnSave").prop("disabled", true);
     }
 }
 
@@ -51,7 +53,8 @@ $(document).ready(function () {
                 $("#PlanCost").val("$" + json.Cost.toFixed(2));
                 $("#PlanMax").val(json.MaxClients);
                 var currentPlanId = $("#CurrentPlanId").val();
-                if (currentPlanId !== planId) {
+                var hasPaymentMethod = $("#HasPaymentMethod").val();
+                if ((currentPlanId !== planId) || (hasPaymentMethod === "False")) {
                     $("#btnSave").prop("disabled", false);
                 } else {
                     $("#btnSave").prop("disabled", true);
@@ -80,7 +83,8 @@ $(document).ready(function () {
             }
         });
         var hasPaymentMethod = $("#HasPaymentMethod").val();
-        if (hasPaymentMethod === "True") return;
+        var planId = $("#PlanId").val();
+        if ((hasPaymentMethod === "True") || (planId === "free")) return;
         $("#btnSave").prop("disabled", true);
         e.preventDefault();
         e.stopPropagation();

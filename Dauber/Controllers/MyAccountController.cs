@@ -41,8 +41,10 @@ namespace Dauber.Controllers
                             ViewBag.Error = cardResult.Error;
                             return View("Error");
                         }
+                        Coach.UpdateCard(model.CoachId, cardResult.CardId);
                     }
 
+                    
                     var planResult = StripeService.UpdatePlan(model.CustomerId, model.SubscriptionId, model.PlanId);
                     if (!planResult.Success)
                     {
@@ -59,11 +61,9 @@ namespace Dauber.Controllers
                     return View("Error");
                 }
             }
-            //TODO Add new card with new expiration 
-            //TODO http://stackoverflow.com/questions/20065939/change-credit-card-information-stripe
-            //TODO Update Card page/action via API https://github.com/jaymedavis/stripe.net,
             //TODO testimonials page http://bootsnipp.com/snippets/featured/responsive-quote-carousel //should i write/store interface for testimonials or just hard code them?
             //TODO switch plans page to be dynamic rather than static?
+            //TODO conditions terms of service etc.
             ViewBag.Error = "This submission could not be accepted as a required field was missing";
             return View("Error");
         }
@@ -71,9 +71,20 @@ namespace Dauber.Controllers
         [HttpGet]
         public ActionResult UpdateCard()
         {
-            return View();
+            return View(new MyAccountUpdateCardViewModel(User.Identity.Name));
         }
 
+        [HttpPost]
+        public ActionResult UpdateCard(MyAccountUpdateCardSubmissionViewModel model)
+        {
+            //if !model.haspaymentplan, don't delete
+            //create view model that has token, customerId, cardId
+            //delete card needs customerId, cardId, check if result successful
+            //set cardId to null in db for customer, needs customerId
+            //create card needs token, customerId
+            //set cardId to cardId in db for customer, needs customerId, and cardId
+            return View();
+        }
 
 
         [HttpGet]

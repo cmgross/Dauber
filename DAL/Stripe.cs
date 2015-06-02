@@ -72,6 +72,21 @@ namespace DAL
 
                 var cardService = new StripeCardService();
                 StripeCard stripeCard = cardService.Create(customerId, myCard);
+                return new StripeResult { Success = true, Error = string.Empty, CardId = stripeCard.Id};
+            }
+            catch (StripeException exception)
+            {
+                return new StripeResult { Error = exception.Message };
+            }
+        }
+
+        public static StripeResult DeleteCard(string customerId, string cardId)
+        {
+            try
+            {
+
+                var cardService = new StripeCardService();
+                cardService.Delete(customerId, cardId);
                 return new StripeResult { Success = true, Error = string.Empty };
             }
             catch (StripeException exception)
@@ -86,5 +101,6 @@ namespace DAL
         public bool Success { get; set; }
         public string Error { get; set; }
         public string CustomerId { get; set; }
+        public string CardId { get; set; }
     }
 }

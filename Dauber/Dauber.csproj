@@ -245,6 +245,7 @@
     <Content Include="Images\poweredbyStripe.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\cardChange.js" />
     <Content Include="Scripts\clientsIndex.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -305,6 +306,7 @@
     <Content Include="Views\MyAccount\Index.cshtml" />
     <Content Include="Views\MyAccount\UpdatePlan.cshtml" />
     <Content Include="Views\Plans\Index.cshtml" />
+    <Content Include="Views\MyAccount\UpdateCard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
