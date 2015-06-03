@@ -33,6 +33,9 @@ namespace Dauber
                       "~/Content/sweetalert.css",
                       "~/Content/zocial.css"));
 
+            bundles.Add(new StyleBundle("~/Content/Testimonials").Include(
+                     "~/Content/testimonials.css"));
+
             bundles.Add(new ScriptBundle("~/bundles/ClientsIndex").Include(
               "~/Scripts/clientsIndex.js"));
 
@@ -41,6 +44,9 @@ namespace Dauber
 
             bundles.Add(new ScriptBundle("~/bundles/CardChange").Include(
            "~/Scripts/cardChange.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/Testimonials").Include(
+          "~/Scripts/testimonials.js"));
         }
     }
 }

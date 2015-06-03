@@ -8,6 +8,9 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
+                @Html.ActionLink("Testimonials", "Index", "Testimonials")
+            </li>
+            <li>
                 @Html.ActionLink("Plans", "Index", "Plans")
             </li>
             @*@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
@@ -31,7 +34,10 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
+        <li>
+            @Html.ActionLink("Testimonials", "Index", "Testimonials")
+        @*</li>*@
         <li>@Html.ActionLink("Plans", "Index", "Plans")</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new {id = "loginLink"})</li>
     </ul>
 }

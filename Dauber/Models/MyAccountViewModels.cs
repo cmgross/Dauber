@@ -179,6 +179,7 @@ namespace Dauber.Models
 
     public class MyAccountUpdateCardSubmissionViewModel
     {
+        [Required]
         public string Token { get; set; }
         [Required]
         public string CustomerId { get; set; }

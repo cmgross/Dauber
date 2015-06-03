@@ -122,11 +122,11 @@ namespace DAL
             }
         }
 
-        public static void UpdateCard(string coachId, string cardId)
+        public static void UpdateCard(string coachId, string cardId = null)
         {
             using (var db = new Database("DauberDB"))
             {
-                var query = String.Format("UPDATE AspNetUsers SET StripeCardId = '{0}' WHERE CoachId={1}", cardId, coachId);
+                var query = cardId == null ? String.Format("UPDATE AspNetUsers SET StripeCardId = NULL WHERE CoachId={0}", coachId) : String.Format("UPDATE AspNetUsers SET StripeCardId = '{0}' WHERE CoachId={1}", cardId, coachId);
                 db.Execute(query);
             }
         }

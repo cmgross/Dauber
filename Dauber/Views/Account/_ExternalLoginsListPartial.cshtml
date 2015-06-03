@@ -1,7 +1,7 @@
 ﻿@model Dauber.Models.ExternalLoginListViewModel
 @using Microsoft.Owin.Security
 
-<h4>Use another service to log in.</h4>
+@*<h4>Use another service to log in.</h4>*@
 <hr />
 @{
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
@@ -19,6 +19,18 @@
         using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }))
         {
             @Html.AntiForgeryToken()
+            <div class="well">
+                <p>
+                    <strong>
+                        By clicking "Google" to log in, I agree that:
+                    </strong>
+                    <ul>
+                        <li>I have read and accepted the <a href="#" onclick=" location.href='@Url.Action("TermsAndConditions", "Home")' ">Terms and Conditions</a>.</li>
+                        <li>I may receive communications from the Dauber team.</li>
+                        <li>I am at least 18 years old.</li>
+                    </ul>
+                </p>
+            </div>
             <div id="socialLoginList">
                 <p>
                     @foreach (AuthenticationDescription p in loginProviders)

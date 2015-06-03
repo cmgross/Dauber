@@ -6,7 +6,7 @@
     <title>Dauber - @ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @*@RenderSection("HeadSection", false)*@
+    @RenderSection("HeadSection", false)
 </head>
 <body>
     <div class="navbar navbar-default navbar-fixed-top">
@@ -29,6 +29,11 @@
     </div>
     <div class="container body-content">
         @RenderBody()
+        <br/>
+        <hr />
+        <footer>
+            <small class="evenSmaller">&copy; @DateTime.Now.Year <a href="http://chuckgrossfitness.com/" target="_blank"></a>Chuck Gross Fitness, LLC. All Rights Reserved. Use of this website and service constitutes acceptance of the Dauber <a href="#" onclick=" location.href='@Url.Action("TermsAndConditions", "Home")'">Terms and Conditions</a>.</small>
+        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

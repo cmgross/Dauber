@@ -26,3 +26,7 @@ textarea {
 .centerAlign {
     text-align: center;
 }
+
+.evenSmaller {
+    font-size: 75%;
+}

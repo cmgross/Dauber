@@ -7,16 +7,10 @@ using System.Web.Mvc;
 namespace Dauber.Controllers
 {
     [Attributes.RequireHttps]
-    public class HomeController : Controller
+    public class TestimonialsController : Controller
     {
         [HttpGet]
         public ActionResult Index()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult TermsAndConditions()
         {
             return View();
         }
