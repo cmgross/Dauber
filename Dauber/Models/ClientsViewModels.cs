@@ -9,6 +9,7 @@ namespace Dauber.Models
 {
     public class NewClientDiaryViewModel
     {
+        public bool IsAdmin { get; set; }
         public bool IsAvailable { get; set; }
         public bool IsPublic { get; set; }
         public int MaxClientsForPlan { get; set; }
@@ -23,6 +24,7 @@ namespace Dauber.Models
             var coach = Coach.GetCoachById(userId);
             MaxClientsForPlan = coach.Plan.MaxClients;
             CurrentClientsCount = coach.Clients.Count;
+            IsAdmin = coach.Admin;
         }
     }
 
