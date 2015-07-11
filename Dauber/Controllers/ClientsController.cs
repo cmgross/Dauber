@@ -37,7 +37,6 @@ namespace Dauber.Controllers
                 {
                     client.Save();
                     var coach = Coach.GetCoachById(client.UserId);
-                    Cacheable.PurgeCoach(coach.CoachId);
                     return RedirectToAction("Index", "Clients");
                 }
                 catch (Exception ex)
@@ -65,7 +64,6 @@ namespace Dauber.Controllers
                 {
                     client.Save();
                     var coach = Coach.GetCoachById(client.UserId);
-                    Cacheable.PurgeCoach(coach.CoachId);
                     return RedirectToAction("Index", "Clients");
                 }
                 catch (Exception ex)
@@ -86,9 +84,6 @@ namespace Dauber.Controllers
                 try
                 {
                     Client.Delete(clientId);
-                    var client = Client.GetClient(clientId);
-                    var coach = Coach.GetCoachById(client.UserId);
-                    Cacheable.PurgeCoach(coach.CoachId);
                     return RedirectToAction("Index", "Clients");
                 }
                 catch (Exception ex)
