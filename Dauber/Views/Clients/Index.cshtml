@@ -42,6 +42,9 @@
         <th>
             MFP Username
         </th>
+        <th>
+            Fitocracy Username
+        </th>
         <th>Actions</th>
     </tr>
 
@@ -53,6 +56,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ClientUserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FitocracyUserName)
             </td>
             <td>
                 @using (Html.BeginForm("Delete", "Clients", FormMethod.Post, new { id = "deleteClient" + item.Id, role = "form", @class = "deleteClientForm" }))

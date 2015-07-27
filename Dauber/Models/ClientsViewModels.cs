@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using DAL;
@@ -14,10 +15,12 @@ namespace Dauber.Models
         public bool IsPublic { get; set; }
         public int MaxClientsForPlan { get; set; }
         public int CurrentClientsCount { get; set; }
+        public bool IsValidFitocracyUser { get; set; }
+        public int FitocracyUserId { get; set; }
 
         public NewClientDiaryViewModel() { }
 
-        public NewClientDiaryViewModel(string clientUserName, string userId)
+        public NewClientDiaryViewModel(string clientUserName, string userId, string fitocracyUserName)
         {
             IsAvailable = !Client.AnyClientMatches(clientUserName);
             IsPublic = Scrape.IsPublic(clientUserName);
@@ -25,6 +28,10 @@ namespace Dauber.Models
             MaxClientsForPlan = coach.Plan.MaxClients;
             CurrentClientsCount = coach.Clients.Count;
             IsAdmin = coach.Admin;
+            var dauberUserId = ConfigurationManager.AppSettings["FitocracyUserId"];
+            var fitocracyUserId = Fitocracy.Scrape.GetUserId(fitocracyUserName);
+            IsValidFitocracyUser = fitocracyUserName == string.Empty || fitocracyUserId != int.Parse(dauberUserId);
+            FitocracyUserId = fitocracyUserId;
         }
     }
 
@@ -32,13 +39,19 @@ namespace Dauber.Models
     {
         public bool IsAvailable { get; set; }
         public bool IsPublic { get; set; }
+        public bool IsValidFitocracyUser { get; set; }
+        public int FitocracyUserId { get; set; }
 
         public ClientDiaryViewModel() { }
 
-        public ClientDiaryViewModel(string clientUserName, string userId)
+        public ClientDiaryViewModel(string clientUserName, string userId, string fitocracyUserName)
         {
             IsAvailable = !Client.AnyClientMatchesForOtherCoaches(clientUserName, userId);
             IsPublic = Scrape.IsPublic(clientUserName);
+            var dauberUserId = ConfigurationManager.AppSettings["FitocracyUserId"];
+            var fitocracyUserId = Fitocracy.Scrape.GetUserId(fitocracyUserName);
+            IsValidFitocracyUser = fitocracyUserName == string.Empty || fitocracyUserId != int.Parse(dauberUserId);
+            FitocracyUserId = fitocracyUserId;
         }
     }
 }

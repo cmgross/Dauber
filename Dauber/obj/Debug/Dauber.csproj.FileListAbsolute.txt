@@ -206,3 +206,5 @@ C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\bin\HtmlAgili
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\bin\HtmlAgilityPack.xml
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\obj\Debug\Dauber.dll
 C:\Users\Chuck\Documents\Visual Studio 2013\Projects\Dauber\Dauber\obj\Debug\Dauber.pdb
+C:\VS\Visual Studio 2013\Projects\Dauber\Dauber\bin\Fitocracy.dll
+C:\VS\Visual Studio 2013\Projects\Dauber\Dauber\bin\Fitocracy.pdb

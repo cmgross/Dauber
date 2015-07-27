@@ -1,0 +1,8 @@
+C:\VS\Visual Studio 2013\Projects\Dauber\Fitocracy\bin\Debug\Fitocracy.dll
+C:\VS\Visual Studio 2013\Projects\Dauber\Fitocracy\bin\Debug\Fitocracy.pdb
+C:\VS\Visual Studio 2013\Projects\Dauber\Fitocracy\bin\Debug\HtmlAgilityPack.dll
+C:\VS\Visual Studio 2013\Projects\Dauber\Fitocracy\bin\Debug\HtmlAgilityPack.pdb
+C:\VS\Visual Studio 2013\Projects\Dauber\Fitocracy\bin\Debug\HtmlAgilityPack.xml
+C:\VS\Visual Studio 2013\Projects\Dauber\Fitocracy\obj\Debug\Fitocracy.dll
+C:\VS\Visual Studio 2013\Projects\Dauber\Fitocracy\obj\Debug\Fitocracy.pdb
+C:\VS\Visual Studio 2013\Projects\Dauber\Fitocracy\obj\Debug\Fitocracy.csprojResolveAssemblyReference.cache

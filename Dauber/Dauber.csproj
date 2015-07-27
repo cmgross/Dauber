@@ -325,6 +325,10 @@
       <Project>{587feebd-2321-4bf4-ae42-30437127d720}</Project>
       <Name>DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Fitocracy\Fitocracy.csproj">
+      <Project>{8204cb3f-8604-45bd-9fb1-50231eb47ba9}</Project>
+      <Name>Fitocracy</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MFP\MFP.csproj">
       <Project>{6ebbc29c-dff6-4ace-b14f-06513bacb89f}</Project>
       <Name>MFP</Name>

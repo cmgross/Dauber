@@ -8,6 +8,7 @@
     var url = "/Clients/GetClientMatches";
     var clientUserName = $("#ClientUserName").val();
     var userId = $("#UserId").val();
+    var fitocracyUserName = $("#FitocracyUserName").val();
     var clientAction = "Add";
 
     $.ajax({
@@ -16,7 +17,7 @@
         type: "GET",
         cache: true,
         url: url,
-        data: { clientUserName: clientUserName, userId: userId, clientAction: clientAction },
+        data: { clientUserName: clientUserName, userId: userId, clientAction: clientAction, fitocracyUserName: fitocracyUserName },
         beforeSend: function () {
             $.blockUI({
                 message: "Checking MFP Diary status...",
@@ -39,7 +40,12 @@
                 return;
             }
 
-            if (json.IsAvailable && json.IsPublic) {
+            if (!json.IsValidFitocracyUser) {
+                swal("Oops...", "This is not a valid Fitocracy username.", "error");
+            }
+
+            if (json.IsAvailable && json.IsPublic && json.IsValidFitocracyUser) {
+                $("#FitocracyId").val(json.FitocracyUserId);
                 $("#clientsAdd")[0].submit();
             }
 
@@ -72,6 +78,7 @@ $("#clientsEdit").submit(function (event) {
     var url = "/Clients/GetClientMatches";
     var clientUserName = $("#ClientUserName").val();
     var userId = $("#UserId").val();
+    var fitocracyUserName = $("#FitocracyUserName").val();
     var clientAction = "Edit";
 
     $.ajax({
@@ -80,7 +87,7 @@ $("#clientsEdit").submit(function (event) {
         type: "GET",
         cache: true,
         url: url,
-        data: { clientUserName: clientUserName, userId: userId, clientAction: clientAction },
+        data: { clientUserName: clientUserName, userId: userId, clientAction: clientAction, fitocracyUserName: fitocracyUserName },
         beforeSend: function () {
             $.blockUI({
                 message: "Checking MFP Diary status...",
@@ -98,8 +105,13 @@ $("#clientsEdit").submit(function (event) {
         success: function (data) {
             var json = jQuery.parseJSON(data);
 
-            if (json.IsAvailable && json.IsPublic) {
+            if (json.IsAvailable && json.IsPublic && json.IsValidFitocracyUser) {
+                $("#FitocracyId").val(json.FitocracyUserId);
                 $("#clientsEdit")[0].submit();
+            }
+
+            if (!json.IsValidFitocracyUser) {
+                swal("Oops...", "This is not a valid Fitocracy username.", "error");
             }
 
             if (!json.IsAvailable) { //Assigned to another coach

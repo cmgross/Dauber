@@ -24,6 +24,10 @@ namespace DAL
         [Display(Name = "Name")]
         [StringLength(50)]
         public string ClientName { get; set; }
+        [Display(Name = "Fitocracy UserName")]
+        [StringLength(15)]
+        public string FitocracyUserName { get; set; }
+        public int FitocracyId { get; set; }
 
         public Client() { }
 

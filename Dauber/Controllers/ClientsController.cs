@@ -36,7 +36,6 @@ namespace Dauber.Controllers
                 try
                 {
                     client.Save();
-                    var coach = Coach.GetCoachById(client.UserId);
                     return RedirectToAction("Index", "Clients");
                 }
                 catch (Exception ex)
@@ -63,7 +62,6 @@ namespace Dauber.Controllers
                 try
                 {
                     client.Save();
-                    var coach = Coach.GetCoachById(client.UserId);
                     return RedirectToAction("Index", "Clients");
                 }
                 catch (Exception ex)
@@ -97,7 +95,7 @@ namespace Dauber.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetClientMatches(string clientUserName, string userId, string clientAction)
+        public JsonResult GetClientMatches(string clientUserName, string userId, string clientAction, string fitocracyUserName)
         {
             if (clientUserName == String.Empty) return new JsonResult
             {
@@ -109,11 +107,11 @@ namespace Dauber.Controllers
             switch (clientAction)
             {
                 case "Add":
-                    var newClientDiaryViewModel = new NewClientDiaryViewModel(clientUserName, userId);
+                    var newClientDiaryViewModel = new NewClientDiaryViewModel(clientUserName, userId, fitocracyUserName);
                     result.Data = JsonConvert.SerializeObject(newClientDiaryViewModel);
                     break;
                 case "Edit":
-                    var clientDiaryViewModel = new ClientDiaryViewModel(clientUserName, userId);
+                    var clientDiaryViewModel = new ClientDiaryViewModel(clientUserName, userId, fitocracyUserName);
                     result.Data = JsonConvert.SerializeObject(clientDiaryViewModel);
                     break;
             }
