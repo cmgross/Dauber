@@ -243,6 +243,7 @@
     <Content Include="Content\zocial.woff" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Icon.png" />
+    <Content Include="Images\ben.jpg" />
     <Content Include="Images\dauberExample.gif" />
     <Content Include="Images\poweredbyStripe.png" />
     <Content Include="Scripts\bootstrap.js" />
