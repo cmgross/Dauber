@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
@@ -19,6 +20,22 @@ namespace Fitocracy
             var userId = GetUserId(userName, loginResponse);
             var dauberUserId = ConfigurationManager.AppSettings["FitocracyUserId"];
             return userId == dauberUserId ? int.Parse(dauberUserId) : int.Parse(userId); //if you visit a profile that doesn't exist, you just see your own
+        }
+
+        public static List<DateTime> ScrapeActivityFeed(string userId)
+        {
+            var loginResponse = Cacheable.Login();
+            var document = GetActivityFeed(userId, loginResponse);
+            //var document = DownloadFeed(userName);
+
+            //<div class="stream-inner">
+            //  <div class="stream_item clearfix stream-item-safe" data-ag-type="workout" id="stream_item_41562425">
+            //      <div class="stream-item-headline">
+            //          <a class="action_time gray_link" href="/entry/41562425/">2015-07-22T20:38:27</a>
+            var workouts = document.DocumentNode.SelectNodes("//a[contains(@class,'action_time gray_link')]");
+            if (workouts == null) return new List<DateTime>();
+            var dates = workouts.Select(workout => DateTime.Parse(workout.InnerHtml.Split('T')[0])).ToList();
+            return dates;
         }
 
         internal static CookieCollection Login()
@@ -88,6 +105,28 @@ namespace Fitocracy
             return userId;
         }
 
+        private static HtmlDocument GetActivityFeed(string userId, CookieCollection cookies)
+        {
+            var cookieJar = new CookieContainer();
+            cookieJar.Add(cookies);
+            #region GetActivityForUser
+            var activityUrl = BaseUrl + "/activity_stream/0/?user_id=" + userId + "&types=WORKOUT";
+            var request = (HttpWebRequest)WebRequest.Create(activityUrl);
+            request.CookieContainer = cookieJar;
+            request.UserAgent = "Dauber";
+
+            var activityPage = new HtmlDocument();
+
+            using (var response = request.GetResponse())
+            {
+                using (Stream stream = response.GetResponseStream())
+                {
+                    activityPage.Load(stream);
+                }
+            }
+            #endregion
+            return activityPage;
+        }
         private static string FormatArgs(object args)
         {
             return string.Join(
