@@ -5,14 +5,54 @@
 <div class="well">
     <h1>Dauber</h1>
     <h2>Tools for coaches, by coaches</h2>
-    <p class="lead">        Dauber is a suite of tools created to make the collection of data easier for both you and your clients!</p>
-    <br />
-    <h3>Are you frustrated by MyFitnessPal's lack of tools and support for coaches?</h3>
+    <p class="lead">Dauber is a suite of tools created to make the collection of data easier for both you and your clients!</p>
+    <p>Dauber includes a tool to obtain client nutrition information from MyFitnessPal, as well as a tool to get workout information from Fitocracy.</p>
+</div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Are you frustrated by MyFitnessPal's lack of tools and support for coaches?</h3>
+        </div>
+        <div class="panel-body">
+            <p>
+                Dauber allows you to easily import your client's MyFitnessPal diary into Google Sheets.<br/>
+                Save yourself and your clients both the time and hassle of entering this manually, and <input type="button" class="btn btn-success btn-sm" value="SIGN UP" onclick=" location.href = '@Url.Action("UpdatePlan", "MyAccount")' "/> now!
+            </p>
+            <p>
+                <img src="~/Images/dauberExample.gif" alt="Dauber MyFitnessPal Example"/>
+            </p>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Do you wish you had a way to quickly check if your clients are working out?</h3>
+        </div>
+        <div class="panel-body">
+            <p>
+                Dauber allows you to quickly get a count of your client's workouts in the past week imported into Google Sheets.<br />
+                Quickly find opportunities with your clients to provide feedback and improve their adherence. <input type="button" class="btn btn-success btn-sm" value="SIGN UP" onclick="location.href = '@Url.Action("UpdatePlan", "MyAccount")'" /> now!
+            </p>
+            <p>
+                <img src="~/Images/fitocracyExample.gif" alt="Dauber Fitocracy Example" />
+            </p>
+        </div>
+    </div>
+
+    @*<h3>Are you frustrated by MyFitnessPal's lack of tools and support for coaches?</h3>
     <p>
-        The first Dauber allows you to easily import your client's MyFitnessPal diary into Google Sheets.<br />
+        Dauber allows you to easily import your client's MyFitnessPal diary into Google Sheets.<br />
         Save yourself and your clients both the time and hassle of entering this manually, and <input type="button" class="btn btn-success btn-sm" value="SIGN UP" onclick="location.href = '@Url.Action("UpdatePlan", "MyAccount")'" /> now!
     </p>
     <p>
-        <img src="~/Images/dauberExample.gif" alt="Dauber Example" />
+        <img src="~/Images/dauberExample.gif" alt="Dauber MyFitnessPal Example"/>
+    </p>*@
+
+    @*<h3>Do you wish you had a way to quickly check if your clients are working out?</h3>
+    <p>
+        Dauber allows you to quickly get a count of your client's workouts in the past week imported into Google Sheets.<br />
+        Quickly find opportunities with your clients to provide feedback and improve their adherence. <input type="button" class="btn btn-success btn-sm" value="SIGN UP" onclick="location.href = '@Url.Action("UpdatePlan", "MyAccount")'" /> now!
     </p>
-</div>
+    <p>
+        <img src="~/Images/fitocracyExample.gif" alt="Dauber Fitocracy Example" />
+    </p>*@
+

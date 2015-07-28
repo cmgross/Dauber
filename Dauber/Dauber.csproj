@@ -246,6 +246,7 @@
     <Content Include="Icon.png" />
     <Content Include="Images\ben.jpg" />
     <Content Include="Images\dauberExample.gif" />
+    <Content Include="Images\fitocracyExample.gif" />
     <Content Include="Images\poweredbyStripe.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
