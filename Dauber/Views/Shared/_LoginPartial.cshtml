@@ -7,12 +7,12 @@
         @Html.AntiForgeryToken()
 
         <ul class="nav navbar-nav navbar-right">
-            <li>
+            @*<li>
                 @Html.ActionLink("Testimonials", "Index", "Testimonials")
             </li>
             <li>
                 @Html.ActionLink("Plans", "Index", "Plans")
-            </li>
+            </li>*@
             @*@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
             <li>
                 @Html.ActionLink("Clients", "Index", "Clients")
@@ -34,10 +34,9 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Testimonials", "Index", "Testimonials")
-        @*</li>*@
-        <li>@Html.ActionLink("Plans", "Index", "Plans")</li>
+        @*<li>
+            @Html.ActionLink("Testimonials", "Index", "Testimonials")</li>
+        <li>@Html.ActionLink("Plans", "Index", "Plans")</li>*@
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new {id = "loginLink"})</li>
     </ul>
 }

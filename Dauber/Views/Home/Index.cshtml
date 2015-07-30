@@ -3,78 +3,167 @@
 }
 
 @section HeadSection{
-       @Styles.Render("~/Content/onepagewonder")
-    }
-<div>
-    
-        <h2>Dauber</h2>
-        <h3>The revolutionary tool for fitness client tracking</h3>
-
+    @Styles.Render("~/Content/onepagewonder")
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    @*http://startbootstrap.com/template-overviews/one-page-wonder/*@
+    @Styles.Render("~/Content/Testimonials")
+}
+<div class="text-center">
+    <h3 class="featurette-heading">Fitness Coaching Simplified</h3>
+    <br />
+    <p><a href="#aboutDivider">Why Dauber?</a> | <a href="#pricingDivider">Pricing</a> | <a href="#testimonialsDivider">Testimonials</a></p>
 </div>
-<hr class="featurette-divider">
+<hr class="featurette-divider" id="aboutDivider">
 <!-- First Featurette -->
 <div class="featurette" id="about">
-    <img class="featurette-image img-circle img-responsive pull-right" src="http://placehold.it/500x500">
-    <h2 class="featurette-heading">
-        Dauber
-        <span class="text-muted">Will Automate Gathering Nutrition Data From MyFitnessPal</span>
-    </h2>
-    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+    <img class="featurette-image img-responsive pull-right" src="http://placehold.it/500x500">
+    <h3 class="featurette-heading">
+        Why <span class="text-muted">Dauber?</span>
+</h3>
+    <p class="lead">Dauber automates gathering data from MyFitnessPal and Fitocracy.</p>
+    <p>Dauber allows you to easily import your client's MyFitnessPal nutrition information, as well as number of times a client tracked a workout in Fitocracy, DIRECTLY and AUTOMATICALLY into Google Sheets.</p>
+    <p>Save yourself and your clients both the time and hassle of entering this manually, and <a href="" onclick=" location.href='@Url.Action("UpdatePlan", "MyAccount")' ">login now</a> to get started with a FREE account! (up to 5 clients)</p>
+    <p><a href="#">[top]</a></p>
 </div>
-<hr class="featurette-divider">
-<!-- Second Featurette -->
-<div class="featurette" id="services">
-    <img class="featurette-image img-circle img-responsive pull-left" src="http://placehold.it/500x500">
-    <h2 class="featurette-heading">
-        The Second Heading
-        <span class="text-muted">Is Pretty Cool Too.</span>
-    </h2>
-    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-</div>
-<hr class="featurette-divider">
-<!-- Third Featurette -->
-<div class="featurette" id="contact">
-    <img class="featurette-image img-circle img-responsive pull-right" src="http://placehold.it/500x500">
-    <h2 class="featurette-heading">
-        The Third Heading
-        <span class="text-muted">Will Seal the Deal.</span>
-    </h2>
-    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-</div>
-<hr class="featurette-divider">
-@*<div class="well">
-    <h1>Dauber</h1>
-    <h2>Tools for coaches, by coaches</h2>
-    <p class="lead">Dauber is a suite of tools created to make the collection of data easier for both you and your clients!</p>
-    <p>Dauber includes a tool to obtain client nutrition information from MyFitnessPal, as well as a tool to get workout information from Fitocracy.</p>
-</div>
+<hr class="featurette-divider" id="pricingDivider">
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Are you frustrated by MyFitnessPal's lack of tools and support for coaches?</h3>
+<!-- Second Featurette -->
+<div class="featurette" id="pricing" style="border:1px solid black;">
+    <div class="container" style="border:1px solid black;">
+        <div class="row" style="border:1px solid black;">
+            <h2 class="featurette-heading">
+                Pricing <span class="text-muted">Plans</span>
+            </h2>
         </div>
-        <div class="panel-body">
-            <p>
-                Dauber allows you to easily import your client's MyFitnessPal diary into Google Sheets.<br/>
-                Save yourself and your clients both the time and hassle of entering this manually, and <input type="button" class="btn btn-success btn-sm" value="SIGN UP" onclick=" location.href = '@Url.Action("UpdatePlan", "MyAccount")' "/> now!
-            </p>
-            <p>
-                <img src="~/Images/dauberExample.gif" alt="Dauber MyFitnessPal Example"/>
-            </p>
+        <div class="row" style="border:1px solid black;">
+            <div class="col-sm-3 col-md-3">
+                <div class="well">
+                    <h2 class="text-muted">Free</h2>
+                    <ul>
+                        <li>Up to 5 clients</li>
+                        <li>Limited support</li>
+                    </ul>
+                    <hr>
+                    <h3>Free!</h3>
+                    <hr>
+                    <p>
+                        <input type="button" class="btn btn-default btn-sm" value="Select Plan" onclick=" location.href='@Url.Action("UpdatePlan", "MyAccount")' " />
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-3">
+                <div class="well">
+                    <h2 class="text-success">Pro</h2>
+                    <ul>
+                        <li>Up to 25 clients</li>
+                        <li>Unlimited support</li>
+                    </ul>
+                    <hr>
+                    <h3>$30 / month</h3>
+                    <hr>
+                    <p>
+                        <input type="button" class="btn btn-success btn-sm" value="Select Plan" onclick=" location.href='@Url.Action("UpdatePlan", "MyAccount")' " />
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-3">
+                <div class="well">
+                    <h2 class="text-warning">Elite</h2>
+                    <ul>
+                        <li>Up to 50 clients</li>
+                        <li>Unlimited support</li>
+                    </ul>
+                    <hr>
+                    <h3>$50 / month</h3>
+                    <hr>
+                    <p>
+                        <input type="button" class="btn btn-warning btn-sm" value="Select Plan" onclick=" location.href='@Url.Action("UpdatePlan", "MyAccount")' " />
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="border:1px solid black;">
+            <h3>
+                Have more than 50 clients? <a href="mailto:chuck@chuckgrossfitness.com">Let's talk!</a>
+            </h3>
+        </div>
+        <div class="row" style="border:1px solid black;">
+            <p><a href="#">[top]</a></p>
         </div>
     </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Do you wish you had a way to quickly check if your clients are working out?</h3>
-        </div>
-        <div class="panel-body">
-            <p>
-                Dauber allows you to quickly get a count of your client's workouts in the past week imported into Google Sheets.<br />
-                Quickly find opportunities with your clients to provide feedback and improve their adherence. <input type="button" class="btn btn-success btn-sm" value="SIGN UP" onclick="location.href = '@Url.Action("UpdatePlan", "MyAccount")'" /> now!
-            </p>
-            <p>
-                <img src="~/Images/fitocracyExample.gif" alt="Dauber Fitocracy Example" />
-            </p>
-        </div>
-    </div>*@
+</div>
+<hr class="featurette-divider" id="testimonialsDivider">
 
+<!-- Third Featurette -->
+<div class="featurette" id="testimonials">
+    @*<div class="container">*@
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8 text-center">
+            <h3 class="featurette-heading">Testimonials</h3>
+            <h4>See what our users have to say about using Dauber with their coaching clients!</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+            <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+                <!-- Bottom Carousel Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#quote-carousel" data-slide-to="1"></li>
+                    <li data-target="#quote-carousel" data-slide-to="2"></li>
+                </ol>
+                <!-- Carousel Slides / Quotes -->
+                <div class="carousel-inner">
+                    <!-- Quote 1 -->
+                    <div class="item active">
+                        <blockquote>
+                            <div class="row">
+                                <div class="col-sm-3 text-center">
+                                    <img class="img-circle" src="~/Images/ben.jpg" style="width: 100px; height: 100px;">
+                                </div>
+                                <div class="col-sm-9">
+                                    <p>I provide macro targets for my clients and ask them to log their daily macros in a spreadsheet. Many of them use MFP to track their food intake. Dauber makes it easy for them to provide the macros for me without duplication of effort. That makes it easier for me to keep them on track too. I would recommend Dauber to any coaches who want to streamline the process of tracking their clients' macros. The pricing structure makes it affordable even if you have a large client base.</p>
+                                    <small><a href="http://www.benjamintormey.com" target="_blank">Ben Tormey (Director, Benjamin Tormey Limited)</a></small>
+                                </div>
+                            </div>
+                        </blockquote>
+                    </div>
+                    <!-- Quote 2 -->
+                    @*<div class="item">
+                            <blockquote>
+                                <div class="row">
+                                    <div class="col-sm-3 text-center">
+                                        <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/mijustin/128.jpg" style="width: 100px;height:100px;">
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam auctor nec lacus ut tempor. Mauris.</p>
+                                        <small>Someone famous</small>
+                                    </div>
+                                </div>
+                            </blockquote>
+                        </div>*@
+                    <!-- Quote 3 -->
+                    @*<div class="item">
+                            <blockquote>
+                                <div class="row">
+                                    <div class="col-sm-3 text-center">
+                                        <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/keizgoesboom/128.jpg" style="width: 100px;height:100px;">
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut rutrum elit in arcu blandit, eget pretium nisl accumsan. Sed ultricies commodo tortor, eu pretium mauris.</p>
+                                        <small>Someone famous</small>
+                                    </div>
+                                </div>
+                            </blockquote>
+                        </div>*@
+
+                </div>
+                <!-- Carousel Buttons Next/Prev -->
+                <a data-slide="prev" href="#quote-carousel" class="left carousel-control"><i class="fa fa-chevron-left"></i></a>
+                <a data-slide="next" href="#quote-carousel" class="right carousel-control"><i class="fa fa-chevron-right"></i></a>
+            </div>
+            <p class="text-center"><a href="#">[top]</a></p>
+        </div>
+    </div>
+</div>
+<hr class="featurette-divider">
