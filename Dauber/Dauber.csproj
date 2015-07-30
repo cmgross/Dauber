@@ -22,6 +22,7 @@
     <IISExpressUseClassicPipelineMode />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -247,6 +248,7 @@
     <Content Include="Icon.png" />
     <Content Include="Images\ben.jpg" />
     <Content Include="Images\dauberExample.gif" />
+    <Content Include="Images\dauberExampleBoth.gif" />
     <Content Include="Images\fitocracyExample.gif" />
     <Content Include="Images\poweredbyStripe.png" />
     <Content Include="Scripts\bootstrap.js" />
