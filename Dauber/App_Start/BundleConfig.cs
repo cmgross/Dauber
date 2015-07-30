@@ -33,6 +33,9 @@ namespace Dauber
                       "~/Content/sweetalert.css",
                       "~/Content/zocial.css"));
 
+            bundles.Add(new StyleBundle("~/Content/onepagewonder").Include(
+                "~/Content/one-page-wonder.css"));
+
             bundles.Add(new StyleBundle("~/Content/Testimonials").Include(
                      "~/Content/testimonials.css"));
 
