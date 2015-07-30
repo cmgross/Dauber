@@ -17,7 +17,15 @@ namespace Dauber.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View(new MyAccountIndexViewModel(User.Identity.Name));
+            try
+            {
+                return View(new MyAccountIndexViewModel(User.Identity.Name));
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View("Error");
+            }
         }
 
         [HttpGet]
