@@ -24,8 +24,8 @@ namespace Dauber.Controllers.v1
             int.TryParse(id, out coachId);
             if (coachId == 0) return Request.CreateResponse(HttpStatusCode.BadRequest);
             var coach = Cacheable.GetCoach(coachId);
-            if (!coach.Active) return Request.CreateResponse(HttpStatusCode.BadRequest);
-            if (!coach.Clients.Select(c => c.ClientUserName).Contains(userName)) return Request.CreateResponse(HttpStatusCode.BadRequest);
+            if (!coach.Active) return new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent("Inactive account. Please contact chuck@chuckgrossfitness.com for more info.") };
+            if (!coach.Clients.Select(c => c.ClientUserName).Contains(userName)) return new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent("Client not configured to your account.") };
             var formattedDate = date.ToString("yyyy-MM-dd");  //date format is going to come in as MM/DD/YYYY, reformat it to YYYY-MM-DD
             var results = MFP.Scrape.GetMacros(userName, formattedDate);
             var responseMessage = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(results.ToString()) };

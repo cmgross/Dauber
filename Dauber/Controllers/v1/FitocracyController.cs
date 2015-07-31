@@ -26,9 +26,9 @@ namespace Dauber.Controllers.v1
 
             var coach = Cacheable.GetCoach(coachId);
             //var coach = Coach.Get(coachId);
-            if (!coach.Active) return Request.CreateResponse(HttpStatusCode.BadRequest);
-            if (!coach.Clients.Select(c => c.FitocracyUserName).Contains(userName)) return Request.CreateResponse(HttpStatusCode.BadRequest);
-           
+            if (!coach.Active) return new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent("Inactive account. Please contact chuck@chuckgrossfitness.com for more info.") };
+            if (!coach.Clients.Select(c => c.FitocracyUserName).Contains(userName)) return new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent("Client not configured to your account.") };
+
             var user = coach.Clients.FirstOrDefault(c => c.FitocracyUserName == userName);
             if (user == null) return Request.CreateResponse(HttpStatusCode.BadRequest);
             var recentWorkouts = Fitocracy.Scrape.ScrapeActivityFeed(user.FitocracyId.ToString());
