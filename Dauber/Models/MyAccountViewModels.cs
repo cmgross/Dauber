@@ -28,16 +28,31 @@ namespace Dauber.Models
         public string CardNumber { get; set; }
         [Display(Name = "Expiration Date")]
         public string ExpirationDate { get; set; }
-
+        public bool IsAdmin { get; set; }
+        public bool IsPartner { get; set; }
         public MyAccountIndexViewModel() { }
 
         public MyAccountIndexViewModel(string userName)
         {
             var coach = Coach.Get(userName);
             User = coach.UserName;
-            PlanDescription = coach.Plan.Name;
-            MaxClients = coach.Plan.MaxClients;
             CurrentClients = coach.Clients.Count;
+            IsAdmin = coach.Admin;
+            IsPartner = coach.Partner;
+
+            if (IsPartner || IsAdmin)
+            {
+                PlanDescription = "Unlimited";
+                MaxClients = 999;
+                return;
+            }
+            else
+            {
+                PlanDescription = coach.Plan.Name;
+                MaxClients = coach.Plan.MaxClients;
+            }
+                
+            
             var customer = StripeService.GetCustomer(coach.StripeCustomerId);
             HasCardOnFile = customer.StripeCardList.TotalCount > 0;
             if (customer.StripeCardList.TotalCount == 0) return;

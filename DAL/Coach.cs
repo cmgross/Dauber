@@ -17,6 +17,7 @@ namespace DAL
         public string UserName { get; set; }
         public bool Active { get; set; }
         public bool Admin { get; set; }
+        public bool Partner { get; set; }
         public int CoachId { get; set; }
         public string PlanId { get; set; }
         public string StripeCustomerId { get; set; }
@@ -100,6 +101,15 @@ namespace DAL
             using (var db = new Database("DauberDB"))
             {
                 var query = String.Format("UPDATE AspNetUsers SET Active = '{0}' WHERE Id='{1}'", activeStatus, id);
+                db.Execute(query);
+            }
+        }
+
+        public static void ChangePartner(string id, bool activeStatus)
+        {
+            using (var db = new Database("DauberDB"))
+            {
+                var query = String.Format("UPDATE AspNetUsers SET Partner = '{0}' WHERE Id='{1}'", activeStatus, id);
                 db.Execute(query);
             }
         }

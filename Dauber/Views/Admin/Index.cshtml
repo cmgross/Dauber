@@ -12,7 +12,8 @@
             <th class="centerAlign">User</th>
             <th class="centerAlign">Active</th>
             <th class="centerAlign">Admin</th>
-            <th class="centerAlign">Actions</th>
+            <th class="centerAlign">Partner</th>
+            <th class="centerAlign" colspan="3">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -23,6 +24,7 @@
                 <td>@Html.DisplayFor(modelItem => coach.UserName)</td>
                 <td>@Html.DisplayFor(modelItem => coach.Active)</td>
                 <td>@Html.DisplayFor(modelItem => coach.Admin)</td>
+                <td>@Html.DisplayFor(modelItem => coach.Partner)</td>
                 <td>
                     @using (Html.BeginForm("ChangeActive", "Admin", FormMethod.Post, new { role = "form", @class = "form-inline" }))
                     {
@@ -31,7 +33,18 @@
 
                         <button type="submit" class="btn btn-warning btn-xs" style="float: left">Set Inactive</button>
                     }
-                    @using (Html.BeginForm("Delete", "Admin", FormMethod.Post, new { id = "deleteCoach" + coach.CoachId, role = "form", @class = "deleteClientForm" }))
+                </td>
+                <td>
+                    @using (Html.BeginForm("ChangePartner", "Admin", FormMethod.Post, new { role = "form", @class = "form-inline" }))
+                    {
+                        @Html.HiddenFor(m => coach.Id)
+                        @Html.HiddenFor(m => coach.Partner)
+
+                        <button type="submit" class="btn btn-warning btn-xs" style="float: left">Set Partner</button>
+                    }
+                </td>
+                <td>
+                    @using (Html.BeginForm("Delete", "Admin", FormMethod.Post, new { id = "deleteCoach" + coach.CoachId, role = "form", @class = "deleteClientForm form-inline" }))
                     {
                         @Html.HiddenFor(m => coach.Id)
                         @Html.HiddenFor(m => coach.Active)

@@ -22,6 +22,27 @@ namespace Dauber.Controllers
         }
 
         [HttpPost]
+        public ActionResult ChangePartner(Coach coach)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    Coach.ChangePartner(coach.Id, !coach.Partner);
+                    Cacheable.PurgeCoach(coach.CoachId);
+                    return RedirectToAction("Index", "Admin");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Error = ex.Message;
+                    return View("Error");
+                }
+            }
+            ViewBag.Error = "This submission could not be accepted as a required field was missing";
+            return View("Error");
+        }
+
+        [HttpPost]
         public ActionResult ChangeActive(Coach coach)
         {
             if (ModelState.IsValid)

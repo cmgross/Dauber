@@ -39,24 +39,27 @@
         <dd>
             @Html.DisplayFor(model => model.MaxClients)
         </dd>
-        <dt>
-            &nbsp;
-        </dt>
-        <dd>
-            &nbsp;
-        </dd>
-        <dt>
-            &nbsp;
-        </dt>
-        <dd>
-            <input type="button" class="btn btn-success btn-xs" value="Change Plan" onclick="location.href='@Url.Action("UpdatePlan", "MyAccount")' " />
-        </dd>
+        @if (!Model.IsPartner && !Model.IsAdmin)
+        {
+            <dt>
+                &nbsp;
+            </dt>
+            <dd>
+                &nbsp;
+            </dd>
+            <dt>
+                &nbsp;
+            </dt>
+            <dd>
+                <input type="button" class="btn btn-success btn-xs" value="Change Plan" onclick="location.href='@Url.Action("UpdatePlan", "MyAccount")' " />
+            </dd>
+        }
     </dl>
 </div>
 
 @if (Model.HasCardOnFile)
 {
-    <br/>
+    <br />
     <h4>Payment Method</h4>
     <div>
         <hr />
