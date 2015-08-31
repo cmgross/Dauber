@@ -14,6 +14,7 @@ namespace Dauber.Models
         public bool Partner { get; set; }
         public string PlanId { get; set; }
         public string StripeCustomerId { get; set; }
+        public string ReferrerId { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

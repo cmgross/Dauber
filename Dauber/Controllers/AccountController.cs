@@ -57,9 +57,22 @@ namespace Dauber.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult Login(string returnUrl, string inviteCode = null)
         {
             ViewBag.ReturnUrl = returnUrl;
+            if (inviteCode == null) return View();
+            var cookie = Request.Cookies["referrerId"];
+            if (cookie != null)
+            {
+                var c = new HttpCookie("referrerId") { Expires = DateTime.Now.AddDays(-1) };
+                Response.Cookies.Add(c);
+            }
+            var referrer = new HttpCookie("referrerId")
+            {
+                Expires = DateTime.Now.AddDays(7),
+                Value = inviteCode
+            };
+            Response.Cookies.Add(referrer);
             return View();
         }
 
@@ -153,7 +166,7 @@ namespace Dauber.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, ReferrerId = model.ReferrerId};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -165,6 +178,12 @@ namespace Dauber.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
+                    var cookie = Request.Cookies["referrerId"];
+                    if (cookie != null)
+                    {
+                        var c = new HttpCookie("referrerId") { Expires = DateTime.Now.AddDays(-1) };
+                        Response.Cookies.Add(c);
+                    }
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
@@ -345,7 +364,18 @@ namespace Dauber.Controllers
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+
+                    var externalLoginConfirmationViewModel = new ExternalLoginConfirmationViewModel
+                    {
+                        Email = loginInfo.Email
+                    };
+
+                    var cookie = Request.Cookies["referrerId"];
+                    if (cookie != null)
+                    {
+                        externalLoginConfirmationViewModel.ReferrerId = cookie.Value;
+                    }
+                    return View("ExternalLoginConfirmation", externalLoginConfirmationViewModel);
             }
         }
 
@@ -374,7 +404,16 @@ namespace Dauber.Controllers
                 IdentityResult result = new IdentityResult();
                 if (stripeResult.Success)
                 {
-                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, EmailConfirmed = true, Active = true, PlanId = "free", StripeCustomerId = stripeResult.CustomerId };
+                    var user = new ApplicationUser
+                    {
+                        UserName = model.Email, 
+                        Email = model.Email, 
+                        EmailConfirmed = true, 
+                        Active = true, 
+                        PlanId = "free", 
+                        StripeCustomerId = stripeResult.CustomerId,
+                        ReferrerId = model.ReferrerId
+                    };
                     result = await UserManager.CreateAsync(user);
                     if (result.Succeeded)
                     {
@@ -382,6 +421,12 @@ namespace Dauber.Controllers
                         if (result.Succeeded)
                         {
                             await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                            var cookie = Request.Cookies["referrerId"];
+                            if (cookie != null)
+                            {
+                                var c = new HttpCookie("referrerId") { Expires = DateTime.Now.AddDays(-1) };
+                                Response.Cookies.Add(c);
+                            }
                             return RedirectToLocal(returnUrl);
                         }
                     }

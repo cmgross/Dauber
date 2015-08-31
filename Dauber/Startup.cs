@@ -11,7 +11,7 @@ namespace Dauber
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            SqlDependency.Start(ConfigurationManager.ConnectionStrings["DauberDB"].ConnectionString);
+            //SqlDependency.Start(ConfigurationManager.ConnectionStrings["DauberDB"].ConnectionString);
         }
     }
 }

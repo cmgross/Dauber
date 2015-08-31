@@ -21,6 +21,7 @@ namespace DAL
         public int CoachId { get; set; }
         public string PlanId { get; set; }
         public string StripeCustomerId { get; set; }
+        public string ReferrerId { get; set; }
 
         [Ignore]
         public List<Client> Clients { get; set; }

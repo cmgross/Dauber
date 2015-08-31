@@ -30,6 +30,7 @@ namespace Dauber.Models
         public string ExpirationDate { get; set; }
         public bool IsAdmin { get; set; }
         public bool IsPartner { get; set; }
+        public string ReferrerId { get; set; }
         public MyAccountIndexViewModel() { }
 
         public MyAccountIndexViewModel(string userName)
@@ -39,6 +40,7 @@ namespace Dauber.Models
             CurrentClients = coach.Clients.Count;
             IsAdmin = coach.Admin;
             IsPartner = coach.Partner;
+            ReferrerId = IsPartner ? coach.Id : null;
 
             if (IsPartner || IsAdmin)
             {
