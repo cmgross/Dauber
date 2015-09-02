@@ -4,8 +4,63 @@
     ViewBag.Title = "Admin";
 }
 
-<h3>Active Coaches</h3>
+<h3>Activated Coaches (@Model.ActivatedCoaches.Count)</h3>
 <table class="table table-bordered table-hover table-condensed" id="tbactiveCoaches">
+    <thead>
+        <tr>
+            <th class="centerAlign">CoachId</th>
+            <th class="centerAlign">User</th>
+            <th class="centerAlign"># Clients</th>
+            <th class="centerAlign">Active</th>
+            <th class="centerAlign">Admin</th>
+            <th class="centerAlign">Partner</th>
+            <th class="centerAlign" colspan="3">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var coach in Model.ActivatedCoaches)
+        {
+            <tr class="centerAlign">
+                <td>@Html.DisplayFor(modelItem => coach.CoachId)</td>
+                <td>@Html.DisplayFor(modelItem => coach.UserName)</td>
+                <td>@Html.DisplayFor(modelItem => coach.Clients.Count)</td>
+                <td>@Html.DisplayFor(modelItem => coach.Active)</td>
+                <td>@Html.DisplayFor(modelItem => coach.Admin)</td>
+                <td>@Html.DisplayFor(modelItem => coach.Partner)</td>
+                <td>
+                    @using (Html.BeginForm("ChangeActive", "Admin", FormMethod.Post, new { role = "form", @class = "form-inline" }))
+                    {
+                        @Html.HiddenFor(m => coach.Id)
+                        @Html.HiddenFor(m => coach.Active)
+
+                        <button type="submit" class="btn btn-warning btn-xs" style="float: left">Set Inactive</button>
+                    }
+                </td>
+                <td>
+                    @using (Html.BeginForm("ChangePartner", "Admin", FormMethod.Post, new { role = "form", @class = "form-inline" }))
+                    {
+                        @Html.HiddenFor(m => coach.Id)
+                        @Html.HiddenFor(m => coach.Partner)
+
+                        <button type="submit" class="btn btn-warning btn-xs" style="float: left">Set Partner</button>
+                    }
+                </td>
+                <td>
+                    @using (Html.BeginForm("Delete", "Admin", FormMethod.Post, new { id = "deleteCoach" + coach.CoachId, role = "form", @class = "deleteClientForm form-inline" }))
+                    {
+                        @Html.HiddenFor(m => coach.Id)
+                        @Html.HiddenFor(m => coach.Active)
+                        var formId = "deleteCoach" + coach.CoachId;
+                        <input type="submit" value="Delete" class="btn btn-danger btn-xs" onclick="@String.Format("DeleteConfirmation('{0}')", formId)" />
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br/>
+<h3>Unactivated Coaches (@Model.UnactivatedCoaches.Count)</h3>
+<table class="table table-bordered table-hover table-condensed" id="tbunactivedCoaches">
     <thead>
         <tr>
             <th class="centerAlign">CoachId</th>
@@ -17,7 +72,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var coach in Model.ActiveCoaches)
+        @foreach (var coach in Model.UnactivatedCoaches)
         {
             <tr class="centerAlign">
                 <td>@Html.DisplayFor(modelItem => coach.CoachId)</td>
@@ -57,7 +112,7 @@
     </tbody>
 </table>
 <br />
-<h3>Inactive Coaches</h3>
+<h3>Inactive Coaches (@Model.InactiveCoaches.Count)</h3>
 <table class="table table-bordered table-hover table-condensed" id="tbinactiveCoaches">
     <thead>
         <tr>

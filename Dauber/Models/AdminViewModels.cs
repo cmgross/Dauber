@@ -9,14 +9,17 @@ namespace Dauber.Models
 {
     public class AdminAllCoachesViewModel
     {
-        public List<Coach> ActiveCoaches { get; set; }
+        public List<Coach> ActivatedCoaches { get; set; }
+        public List<Coach> UnactivatedCoaches { get; set; }
         public List<Coach> InactiveCoaches { get; set; }
 
         public AdminAllCoachesViewModel()
         {
-            var coaches = Coach.GetAllCoaches();
-            ActiveCoaches = coaches.Where(c => c.Active).ToList();
+            List<Coach> coaches = Coach.GetAllCoaches().Select(c => Coach.GetCoachById(c.Id)).ToList();
+            ActivatedCoaches = coaches.Where(c => c.Active && c.Clients.Count > 0).ToList();
+            UnactivatedCoaches = coaches.Where(c => c.Active && c.Clients.Count == 0).ToList();
             InactiveCoaches = coaches.Where(c => !c.Active).ToList();
         }
     }
+
 }
