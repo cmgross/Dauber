@@ -9,6 +9,15 @@
     @RenderSection("HeadSection", false)
 </head>
 <body>
+    <div id="fb-root"></div>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId=777839198980978";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -17,25 +26,22 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">
                     <img src="~/Images/dauberLogo2.png" alt="Wasp with Muscles" class="img-responsive">
                 </a>
-                @*@Html.ActionLink("Dauber", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
             <div class="navbar-collapse collapse">
-                @*<ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Tools for coaches, by coaches", "Index", "Home")</li>
-                </ul>*@
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
-        <br/>
+        <br />
         <hr />
         <footer>
-            <small class="evenSmaller">&copy; @DateTime.Now.Year <a href="http://chuckgrossfitness.com/" target="_blank"></a>Chuck Gross Fitness, LLC. All Rights Reserved. Use of this website and service constitutes acceptance of the Dauber <a href="#" onclick=" location.href='@Url.Action("TermsAndConditions", "Home")'">Terms and Conditions</a>.</small>
+            <small class="evenSmaller">&copy; @DateTime.Now.Year <a href="http://chuckgrossfitness.com/" target="_blank"></a>Chuck Gross Fitness, LLC. All Rights Reserved. Use of this website and service constitutes acceptance of the Dauber <a href="#" onclick=" location.href = '@Url.Action("TermsAndConditions", "Home")' ">Terms and Conditions</a>.</small>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div class="fb-like" data-href="https://www.facebook.com/dauberapp" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
         </footer>
     </div>
 
