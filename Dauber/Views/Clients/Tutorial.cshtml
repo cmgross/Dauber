@@ -4,6 +4,13 @@
     ViewBag.Title = "Tutorial";
 }
 <h1>Using Dauber Tutorial</h1>
+<p id="video"><a href="#video">Tutorial Video</a> | <a href="#mfp">MyFitnessPal</a> | <a href="#fito">Fitocracy</a></p>
+<div class="well">
+    <h3>Tutorial Video</h3>
+    <iframe width="420" height="315" src="https://www.youtube.com/embed/j6SPpT9m91s" frameborder="0" allowfullscreen></iframe>
+    <p><a href="#">[top]</a></p>
+    <p id="mfp"></p>
+</div>
 <div class="well">
     <h3>For MyFitnessPal Data</h3>
     <img src="~/Images/dauberMFPExampleSheet.png" class="img-responsive" />
@@ -17,8 +24,9 @@
     </ol>
     <label for="MfpFormula">Formula:</label>
     @Html.TextBoxFor(model => model.MfpFormula, new { disabled = "disabled", @style = "width: 780px" })
+    <p><a href="#">[top]</a></p>
+    <p id="fito"></p>
 </div>
-<br/>
 <div class="well">
     <h3>For Fitocracy</h3>
     <img src="~/Images/dauberFitoExampleSheet.png" class="img-responsive" />
@@ -32,6 +40,7 @@
     </ol>
     <label for="FitoFormula">Formula:</label>
     @Html.TextBoxFor(model => model.FitoFormula, new { disabled = "disabled", @style = "width: 800px" })
+    <p><a href="#">[top]</a></p>
 </div>
 
 <p><input type="button" class="btn btn-default btn-sm" value="Back to Clients" onclick="location.href = '@Url.Action("Index", "Clients")'"></p>
