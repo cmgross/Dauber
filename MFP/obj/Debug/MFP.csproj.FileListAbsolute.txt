@@ -19,6 +19,5 @@ C:\Users\Chuck\Documents\Visual Studio 2015\Projects\Dauber\MFP\bin\Debug\MFP.pd
 C:\Users\Chuck\Documents\Visual Studio 2015\Projects\Dauber\MFP\bin\Debug\HtmlAgilityPack.dll
 C:\Users\Chuck\Documents\Visual Studio 2015\Projects\Dauber\MFP\bin\Debug\HtmlAgilityPack.pdb
 C:\Users\Chuck\Documents\Visual Studio 2015\Projects\Dauber\MFP\bin\Debug\HtmlAgilityPack.xml
-C:\Users\Chuck\Documents\Visual Studio 2015\Projects\Dauber\MFP\obj\Debug\MFP.csprojResolveAssemblyReference.cache
 C:\Users\Chuck\Documents\Visual Studio 2015\Projects\Dauber\MFP\obj\Debug\MFP.dll
 C:\Users\Chuck\Documents\Visual Studio 2015\Projects\Dauber\MFP\obj\Debug\MFP.pdb

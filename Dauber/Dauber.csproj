@@ -214,6 +214,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModels.cs" />
+    <Compile Include="Models\ClientsIndexViewModel.cs" />
     <Compile Include="Models\ClientsViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -250,7 +251,9 @@
     <Content Include="Images\ben.jpg" />
     <Content Include="Images\dauberExample.gif" />
     <Content Include="Images\dauberExampleBoth.gif" />
+    <Content Include="Images\dauberFitoExampleSheet.png" />
     <Content Include="Images\dauberLogo2.png" />
+    <Content Include="Images\dauberMFPExampleSheet.png" />
     <Content Include="Images\fitocracyExample.gif" />
     <Content Include="Images\poweredbyStripe.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -321,6 +324,7 @@
     <Content Include="Views\MyAccount\UpdateCard.cshtml" />
     <Content Include="Views\Testimonials\Index.cshtml" />
     <Content Include="Views\Home\TermsAndConditions.cshtml" />
+    <Content Include="Views\Clients\Tutorial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

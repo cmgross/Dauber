@@ -13,3 +13,4 @@ C:\Users\Chuck\Documents\Visual Studio 2015\Projects\Dauber\Fitocracy\bin\Debug\
 C:\Users\Chuck\Documents\Visual Studio 2015\Projects\Dauber\Fitocracy\bin\Debug\HtmlAgilityPack.xml
 C:\Users\Chuck\Documents\Visual Studio 2015\Projects\Dauber\Fitocracy\obj\Debug\Fitocracy.dll
 C:\Users\Chuck\Documents\Visual Studio 2015\Projects\Dauber\Fitocracy\obj\Debug\Fitocracy.pdb
+C:\Users\Chuck\Documents\Visual Studio 2015\Projects\Dauber\Fitocracy\obj\Debug\Fitocracy.csprojResolveAssemblyReference.cache

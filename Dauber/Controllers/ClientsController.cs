@@ -23,6 +23,12 @@ namespace Dauber.Controllers
         }
 
         [HttpGet]
+        public ActionResult Tutorial()
+        {
+            return View(new ClientsTutorialViewModel(User.Identity.Name));
+        }
+
+        [HttpGet]
         public ActionResult Add(string coachId)
         {
             return View(new Client(coachId));

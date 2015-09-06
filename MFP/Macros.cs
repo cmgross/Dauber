@@ -12,6 +12,7 @@ namespace MFP
         public string Protein { get; set; }
         public string Fat { get; set; }
         public string Carbs { get; set; }
+        public string Fiber { get; set; }
 
         public Macros()
         {
@@ -19,11 +20,12 @@ namespace MFP
             Protein = "0";
             Fat = "0";
             Carbs = "0";
+            Fiber = "0";
         }
 
         public override string ToString()
         {
-            return Calories + "," + Protein + "," + Fat + "," + Carbs;
+            return Calories + "," + Protein + "," + Fat + "," + Carbs + "," + Fiber;
         }
     }
 }

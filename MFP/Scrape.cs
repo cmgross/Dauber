@@ -31,21 +31,23 @@ namespace MFP
             //    <td>273g</td> Carbs [1]
             //    <td>89g</td> Fat [2]
             //    <td>225g</td> Protein [3]
-            //    <td>838mg</td> Cholest
-            //    <td>1,848mg</td> Sodium 
-            //    <td>50g</td> Sugars
-            //    <td class="last">43g</td> Fiber
+            //    <td>838mg</td> Cholest [4]
+            //    <td>1,848mg</td> Sodium [5]
+            //    <td>50g</td> Sugars [6]
+            //    <td class="last">43g</td> Fiber [7]
             //</tr>
             //</tfoot>
 
             HtmlNode totalsRow = footer.Descendants("tr").First();
-            HtmlNodeCollection cells = totalsRow.SelectNodes(".//td[not(@class='first') and not(@class='last')]");
+            //HtmlNodeCollection cells = totalsRow.SelectNodes(".//td[not(@class='first') and not(@class='last')]");
+            HtmlNodeCollection cells = totalsRow.SelectNodes(".//td[not(@class='first')]");
 
             var macros = new Macros
             {
                 Calories = cells[0].InnerText.Replace(",", string.Empty),
                 Carbs = cells[1].InnerText.Replace("g", string.Empty),
                 Fat = cells[2].InnerText.Replace("g", string.Empty),
+                Fiber = cells[7].InnerText.Replace("g", string.Empty),
                 Protein = cells[3].InnerText.Replace("g", string.Empty)
             };
             return macros;

@@ -1,0 +1,37 @@
+﻿@model Dauber.Models.ClientsTutorialViewModel
+
+@{
+    ViewBag.Title = "Tutorial";
+}
+<h1>Using Dauber Tutorial</h1>
+<div class="well">
+    <h3>For MyFitnessPal Data</h3>
+    <img src="~/Images/dauberMFPExampleSheet.png" class="img-responsive" />
+    <br />
+    <ol>
+        <li>For example purposes, see above screenshot.</li>
+        <li>Set up a Google sheet with your client's username in cell A1.</li>
+        <li>Put the date in cell A2 (in Month/Day/Year format).</li>
+        <li>Copy the formula below into cell B2.</li>
+        <li>The data automagically appears.</li>
+    </ol>
+    <label for="MfpFormula">Formula:</label>
+    @Html.TextBoxFor(model => model.MfpFormula, new { disabled = "disabled", @style = "width: 780px" })
+</div>
+<br/>
+<div class="well">
+    <h3>For Fitocracy</h3>
+    <img src="~/Images/dauberFitoExampleSheet.png" class="img-responsive" />
+    <br />
+    <ol>
+        <li>For example purposes, see above screenshot.</li>
+        <li>Set up a Google sheet with your client's username in cell A3.</li>
+        <li>Put the date in cell B2 (in Month/Day/Year format). I use Saturdays, and Dauber looks at the previous 7 days.</li>
+        <li>Copy the formula below into cell B3.</li>
+        <li>The data automagically appears.</li>
+    </ol>
+    <label for="FitoFormula">Formula:</label>
+    @Html.TextBoxFor(model => model.FitoFormula, new { disabled = "disabled", @style = "width: 800px" })
+</div>
+
+<p><input type="button" class="btn btn-default btn-sm" value="Back to Clients" onclick="location.href = '@Url.Action("Index", "Clients")'"></p>

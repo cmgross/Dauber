@@ -4,35 +4,13 @@
     ViewBag.Title = "Clients";
 }
 <div class="well">
-    <h2>Using Dauber</h2>
-    <p class="lead">Dauber is an API that can be uesd to import your client's MFP diary information or get a count of workouts from Fitocracy.</p>
-    @{
-        var mfpUrl = "http://dauber.apphb.com/api/v1/diary/" + Model.CoachId + "/{MyFitnessPalUsername}/{date}";
-        var fitoUrl = "http://dauber.apphb.com/api/v1/fitocracy/" + Model.CoachId + "/{FitocracyUsername}/{date}";
-    }
-    <label for="apiExampleMFP">Your MFP Diary API URL: </label>&nbsp;&nbsp;&nbsp;<input type="text" name="apiExampleMFP" id="apiExampleMFP" disabled value="@mfpUrl" style="width:500px "><br />
-    <label for="apiExampleFito">Your Fitocracy API URL: </label>&nbsp;&nbsp;&nbsp;<input type="text" name="apiExampleFito" id="apiExampleFito" disabled value="@fitoUrl" style="width:500px "><br /><br />
-    <p>
-        The number in the above URLs after the word diary or fitocracy is your Coach Id.<br/>
-        Replace the usernames with your client's usernames, and {date} with a date formatted as double digit month-double digit day-four digit year. E.g., "05-20-2015".<br/>
-        You can only access the diary or Fitocracy feed of clients added to your account, and their MFP diary must be public.
-    </p>
-    <br/>
-    @{
-        var mfpFormula = "=IMPORTDATA(CONCATENATE('https://dauber.apphb.com/api/v1/diary/" + Model.CoachId + "',$A$1,'/',TEXT(A2'mm-DD-yyyy')))";
-        var fitoFormula = "=IMPORTDATA(CONCATENATE('https://dauber.apphb.com/api/v1/fitocracy/" + Model.CoachId + "',$A$1,'/',TEXT(A2'mm-DD-yyyy')))";
-     }
-    <label for="sheetsExampleMFP">MFP Diary usage in Google Sheets: </label>&nbsp;&nbsp;&nbsp;<input type="text" name="sheetsExampleMFP" id="sheetsExampleMFP" disabled value="@mfpFormula" style="width: 750px"><br/>
-    <label for="sheetsExampleFito">Fitocracy usage in Google Sheets: </label>&nbsp;&nbsp;&nbsp;<input type="text" name="sheetsExampleFito" id="sheetsExampleFito" disabled value="@fitoFormula" style="width: 775px"><br /><br />
-    <p>In the above examples, the client username goes in Cell A1, and the date does in A2.<br/>
-        I have an example Google Sheet that shows how to use both APIs!<br/>
-    Please message me and I'll add you to it so that you can try it out!
-    </p>
+    <h3>Using Dauber</h3>
+    You can only access the diary or Fitocracy feed of clients added to your account, and their MFP diary must be public.</p>
+    <p>Please go to the Dauber Tutorial to learn how to use Dauber for your client's data.</p>
+    <p><input type="button" class="btn btn-success btn-sm" value="TUTORIAL" onclick="location.href = '@Url.Action("Tutorial", "Clients")'"></p>
 </div>
-
-
+<br />
 <h2>Clients</h2>
-
 <p>
     <input type="button" class="btn btn-success btn-sm" value="Add Client" onclick="location.href = '@Url.Action("Add", "Clients", new { coachId = Model.Id })'">
 </p>
@@ -53,27 +31,27 @@
 
     @foreach (var item in Model.Clients)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientUserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FitocracyUserName)
-            </td>
-            <td>
-                @using (Html.BeginForm("Delete", "Clients", FormMethod.Post, new { id = "deleteClient" + item.Id, role = "form", @class = "deleteClientForm" }))
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClientName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClientUserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FitocracyUserName)
+        </td>
+        <td>
+            @using (Html.BeginForm("Delete", "Clients", FormMethod.Post, new { id = "deleteClient" + item.Id, role = "form", @class = "deleteClientForm" }))
                 {
-                    @Html.AntiForgeryToken()
-                    @Html.Hidden("clientId", item.Id)
+                @Html.AntiForgeryToken()
+                @Html.Hidden("clientId", item.Id)
                     var formId = "deleteClient" + item.Id;
-                    <input type="button" class="btn btn-primary btn-xs" value="Edit" onclick="location.href = '@Url.Action("Edit", "Clients", new { clientId = item.Id })'">
-                    <input type="submit" value="Delete" class="btn btn-danger btn-xs" onclick="@String.Format("DeleteConfirmation('{0}')", formId)" />
+                <input type="button" class="btn btn-primary btn-xs" value="Edit" onclick="location.href = '@Url.Action("Edit", "Clients", new { clientId = item.Id })'">
+                <input type="submit" value="Delete" class="btn btn-danger btn-xs" onclick="@String.Format("DeleteConfirmation('{0}')", formId)" />
                 }
-            </td>
-        </tr>
+        </td>
+    </tr>
     }
 
 </table>
