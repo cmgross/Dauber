@@ -7,6 +7,7 @@
         @Html.AntiForgeryToken()
 
         <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("About", "About", "Home")</li>
             @*<li>
                 @Html.ActionLink("Testimonials", "Index", "Testimonials")
             </li>
@@ -17,9 +18,9 @@
             <li>
                 @Html.ActionLink("Clients", "Index", "Clients")
             </li>
-            <li>
+            @*<li>
                 @Html.ActionLink("My Account", "Index", "MyAccount")
-            </li>
+            </li>*@
 
             @if (Cacheable.IsAdmin(User.Identity.Name))
             {
@@ -34,6 +35,7 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("About", "About", "Home")</li>
         @*<li>
             @Html.ActionLink("Testimonials", "Index", "Testimonials")</li>
         <li>@Html.ActionLink("Plans", "Index", "Plans")</li>*@

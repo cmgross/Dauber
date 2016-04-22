@@ -35,8 +35,8 @@
         success: function (data) {
             var json = jQuery.parseJSON(data);
 
-            if (!json.IsPartner && !json.IsAdmin && ((json.CurrentClientsCount + 1) > json.MaxClientsForPlan)) {
-                swal("Oops...", "You've exceeded your max number of clients. Please upgrade your plan to add more!", "error");
+            if (!json.IsAdmin && ((json.CurrentClientsCount + 1) > json.MaxClientsForPlan)) {
+                swal("Oops...", "You've exceeded your max number of clients.", "error");
                 return;
             }
 

@@ -11,7 +11,7 @@ namespace Dauber.Models
     public class NewClientDiaryViewModel
     {
         public bool IsAdmin { get; set; }
-        public bool IsPartner { get; set; }
+        //public bool IsPartner { get; set; }
         public bool IsAvailable { get; set; }
         public bool IsPublic { get; set; }
         public int MaxClientsForPlan { get; set; }
@@ -29,7 +29,7 @@ namespace Dauber.Models
             MaxClientsForPlan = coach.Plan.MaxClients;
             CurrentClientsCount = coach.Clients.Count;
             IsAdmin = coach.Admin;
-            IsPartner = coach.Partner;
+            //IsPartner = coach.Partner;
             var dauberUserId = ConfigurationManager.AppSettings["FitocracyUserId"];
             var fitocracyUserId = Fitocracy.Scrape.GetUserId(fitocracyUserName);
             IsValidFitocracyUser = fitocracyUserName == string.Empty || fitocracyUserId != int.Parse(dauberUserId);

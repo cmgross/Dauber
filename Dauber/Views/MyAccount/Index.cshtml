@@ -1,4 +1,4 @@
-﻿@model Dauber.Models.MyAccountIndexViewModel
+﻿@*@model Dauber.Models.MyAccountIndexViewModel
 
 @{
     ViewBag.Title = "My Account";
@@ -39,7 +39,7 @@
         <dd>
             @Html.DisplayFor(model => model.MaxClients)
         </dd>
-        @if (Model.ReferrerId != null)
+        @*@if (Model.ReferrerId != null)
         {
             <dt>
                 &nbsp;
@@ -58,7 +58,7 @@
                 }
                 <input type="text" name="referrerUrl" id="referrerUrl" disabled value="@url" style="width: 750px">
             </dd>
-        }
+        }*@
         @if (!Model.IsPartner && !Model.IsAdmin)
         {
             <dt>
@@ -119,4 +119,4 @@
             </dd>
         </dl>
     </div>
-}
+}*@

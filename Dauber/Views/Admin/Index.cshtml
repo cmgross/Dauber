@@ -13,7 +13,7 @@
             <th class="centerAlign"># Clients</th>
             <th class="centerAlign">Active</th>
             <th class="centerAlign">Admin</th>
-            <th class="centerAlign">Partner</th>
+            @*<th class="centerAlign">Partner</th>*@
             <th class="centerAlign" colspan="3">Actions</th>
         </tr>
     </thead>
@@ -26,7 +26,7 @@
                 <td>@Html.DisplayFor(modelItem => coach.Clients.Count)</td>
                 <td>@Html.DisplayFor(modelItem => coach.Active)</td>
                 <td>@Html.DisplayFor(modelItem => coach.Admin)</td>
-                <td>@Html.DisplayFor(modelItem => coach.Partner)</td>
+                @*<td>@Html.DisplayFor(modelItem => coach.Partner)</td>*@
                 <td>
                     @using (Html.BeginForm("ChangeActive", "Admin", FormMethod.Post, new { role = "form", @class = "form-inline" }))
                     {
@@ -36,7 +36,7 @@
                         <button type="submit" class="btn btn-warning btn-xs" style="float: left">Set Inactive</button>
                     }
                 </td>
-                <td>
+                @*<td>
                     @using (Html.BeginForm("ChangePartner", "Admin", FormMethod.Post, new { role = "form", @class = "form-inline" }))
                     {
                         @Html.HiddenFor(m => coach.Id)
@@ -44,7 +44,7 @@
 
                         <button type="submit" class="btn btn-warning btn-xs" style="float: left">Set Partner</button>
                     }
-                </td>
+                </td>*@
                 <td>
                     @using (Html.BeginForm("Delete", "Admin", FormMethod.Post, new { id = "deleteCoach" + coach.CoachId, role = "form", @class = "deleteClientForm form-inline" }))
                     {
@@ -67,7 +67,7 @@
             <th class="centerAlign">User</th>
             <th class="centerAlign">Active</th>
             <th class="centerAlign">Admin</th>
-            <th class="centerAlign">Partner</th>
+            @*<th class="centerAlign">Partner</th>*@
             <th class="centerAlign" colspan="3">Actions</th>
         </tr>
     </thead>
@@ -79,7 +79,7 @@
                 <td>@Html.DisplayFor(modelItem => coach.UserName)</td>
                 <td>@Html.DisplayFor(modelItem => coach.Active)</td>
                 <td>@Html.DisplayFor(modelItem => coach.Admin)</td>
-                <td>@Html.DisplayFor(modelItem => coach.Partner)</td>
+                @*<td>@Html.DisplayFor(modelItem => coach.Partner)</td>*@
                 <td>
                     @using (Html.BeginForm("ChangeActive", "Admin", FormMethod.Post, new { role = "form", @class = "form-inline" }))
                     {
@@ -89,7 +89,7 @@
                         <button type="submit" class="btn btn-warning btn-xs" style="float: left">Set Inactive</button>
                     }
                 </td>
-                <td>
+                @*<td>
                     @using (Html.BeginForm("ChangePartner", "Admin", FormMethod.Post, new { role = "form", @class = "form-inline" }))
                     {
                         @Html.HiddenFor(m => coach.Id)
@@ -97,7 +97,7 @@
 
                         <button type="submit" class="btn btn-warning btn-xs" style="float: left">Set Partner</button>
                     }
-                </td>
+                </td>*@
                 <td>
                     @using (Html.BeginForm("Delete", "Admin", FormMethod.Post, new { id = "deleteCoach" + coach.CoachId, role = "form", @class = "deleteClientForm form-inline" }))
                     {

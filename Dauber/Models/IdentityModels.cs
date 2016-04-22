@@ -11,10 +11,10 @@ namespace Dauber.Models
     {
         public bool Active { get; set; }
         public bool Admin { get; set; }
-        public bool Partner { get; set; }
+        //public bool Partner { get; set; }
         public string PlanId { get; set; }
-        public string StripeCustomerId { get; set; }
-        public string ReferrerId { get; set; }
+        //public string StripeCustomerId { get; set; }
+        //public string ReferrerId { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

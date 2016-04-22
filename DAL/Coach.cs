@@ -17,11 +17,11 @@ namespace DAL
         public string UserName { get; set; }
         public bool Active { get; set; }
         public bool Admin { get; set; }
-        public bool Partner { get; set; }
+        //public bool Partner { get; set; }
         public int CoachId { get; set; }
         public string PlanId { get; set; }
-        public string StripeCustomerId { get; set; }
-        public string ReferrerId { get; set; }
+        //public string StripeCustomerId { get; set; }
+        //public string ReferrerId { get; set; }
 
         [Ignore]
         public List<Client> Clients { get; set; }
@@ -106,14 +106,14 @@ namespace DAL
             }
         }
 
-        public static void ChangePartner(string id, bool activeStatus)
-        {
-            using (var db = new Database("DauberDB"))
-            {
-                var query = String.Format("UPDATE AspNetUsers SET Partner = '{0}' WHERE Id='{1}'", activeStatus, id);
-                db.Execute(query);
-            }
-        }
+        //public static void ChangePartner(string id, bool activeStatus)
+        //{
+        //    using (var db = new Database("DauberDB"))
+        //    {
+        //        var query = String.Format("UPDATE AspNetUsers SET Partner = '{0}' WHERE Id='{1}'", activeStatus, id);
+        //        db.Execute(query);
+        //    }
+        //}
 
         public static void Delete(string id)
         {
@@ -133,14 +133,14 @@ namespace DAL
             }
         }
 
-        public static void UpdateCard(string coachId, string cardId = null)
-        {
-            using (var db = new Database("DauberDB"))
-            {
-                var query = cardId == null ? String.Format("UPDATE AspNetUsers SET StripeCardId = NULL WHERE CoachId={0}", coachId) : String.Format("UPDATE AspNetUsers SET StripeCardId = '{0}' WHERE CoachId={1}", cardId, coachId);
-                db.Execute(query);
-            }
-        }
+        //public static void UpdateCard(string coachId, string cardId = null)
+        //{
+        //    using (var db = new Database("DauberDB"))
+        //    {
+        //        var query = cardId == null ? String.Format("UPDATE AspNetUsers SET StripeCardId = NULL WHERE CoachId={0}", coachId) : String.Format("UPDATE AspNetUsers SET StripeCardId = '{0}' WHERE CoachId={1}", cardId, coachId);
+        //        db.Execute(query);
+        //    }
+        //}
 
         private static string UserNameHelper(string userName)
         {

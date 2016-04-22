@@ -56,23 +56,32 @@ namespace Dauber.Controllers
 
         //
         // GET: /Account/Login
+        //[AllowAnonymous]
+        //public ActionResult Login(string returnUrl, string inviteCode = null)
+        //{
+        //    ViewBag.ReturnUrl = returnUrl;
+        //    if (inviteCode == null) return View();
+        //    var cookie = Request.Cookies["referrerId"];
+        //    if (cookie != null)
+        //    {
+        //        var c = new HttpCookie("referrerId") { Expires = DateTime.Now.AddDays(-1) };
+        //        Response.Cookies.Add(c);
+        //    }
+        //    var referrer = new HttpCookie("referrerId")
+        //    {
+        //        Expires = DateTime.Now.AddDays(7),
+        //        Value = inviteCode
+        //    };
+        //    Response.Cookies.Add(referrer);
+        //    return View();
+        //}
+
+        //
+        // GET: /Account/Login
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl, string inviteCode = null)
+        public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            if (inviteCode == null) return View();
-            var cookie = Request.Cookies["referrerId"];
-            if (cookie != null)
-            {
-                var c = new HttpCookie("referrerId") { Expires = DateTime.Now.AddDays(-1) };
-                Response.Cookies.Add(c);
-            }
-            var referrer = new HttpCookie("referrerId")
-            {
-                Expires = DateTime.Now.AddDays(7),
-                Value = inviteCode
-            };
-            Response.Cookies.Add(referrer);
             return View();
         }
 
@@ -166,7 +175,7 @@ namespace Dauber.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, ReferrerId = model.ReferrerId};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email }; //, ReferrerId = model.ReferrerId
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -178,12 +187,12 @@ namespace Dauber.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    var cookie = Request.Cookies["referrerId"];
-                    if (cookie != null)
-                    {
-                        var c = new HttpCookie("referrerId") { Expires = DateTime.Now.AddDays(-1) };
-                        Response.Cookies.Add(c);
-                    }
+                    //var cookie = Request.Cookies["referrerId"];
+                    //if (cookie != null)
+                    //{
+                    //    var c = new HttpCookie("referrerId") { Expires = DateTime.Now.AddDays(-1) };
+                    //    Response.Cookies.Add(c);
+                    //}
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
@@ -370,11 +379,11 @@ namespace Dauber.Controllers
                         Email = loginInfo.Email
                     };
 
-                    var cookie = Request.Cookies["referrerId"];
-                    if (cookie != null)
-                    {
-                        externalLoginConfirmationViewModel.ReferrerId = cookie.Value;
-                    }
+                    //var cookie = Request.Cookies["referrerId"];
+                    //if (cookie != null)
+                    //{
+                    //    externalLoginConfirmationViewModel.ReferrerId = cookie.Value;
+                    //}
                     return View("ExternalLoginConfirmation", externalLoginConfirmationViewModel);
             }
         }
@@ -400,39 +409,39 @@ namespace Dauber.Controllers
                     return View("ExternalLoginFailure");
                 }
                 //email confirmed is true because we are only allowing Google login
-                var stripeResult = StripeService.CreateCustomer(info.DefaultUserName, model.Email, "free");
+                //var stripeResult = StripeService.CreateCustomer(info.DefaultUserName, model.Email, "free");
                 IdentityResult result = new IdentityResult();
-                if (stripeResult.Success)
+                //if (stripeResult.Success)
+                //{
+                var user = new ApplicationUser
                 {
-                    var user = new ApplicationUser
-                    {
-                        UserName = model.Email, 
-                        Email = model.Email, 
-                        EmailConfirmed = true, 
-                        Active = true, 
-                        PlanId = "free", 
-                        StripeCustomerId = stripeResult.CustomerId,
-                        ReferrerId = model.ReferrerId
-                    };
-                    result = await UserManager.CreateAsync(user);
+                    UserName = model.Email,
+                    Email = model.Email,
+                    EmailConfirmed = true,
+                    Active = true,
+                    PlanId = "free",
+                    //StripeCustomerId = stripeResult.CustomerId,
+                    //ReferrerId = model.ReferrerId
+                };
+                result = await UserManager.CreateAsync(user);
+                if (result.Succeeded)
+                {
+                    result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
-                        result = await UserManager.AddLoginAsync(user.Id, info.Login);
-                        if (result.Succeeded)
-                        {
-                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                            var cookie = Request.Cookies["referrerId"];
-                            if (cookie != null)
-                            {
-                                var c = new HttpCookie("referrerId") { Expires = DateTime.Now.AddDays(-1) };
-                                Response.Cookies.Add(c);
-                            }
-                            return RedirectToLocal(returnUrl);
-                        }
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        //var cookie = Request.Cookies["referrerId"];
+                        //if (cookie != null)
+                        //{
+                        //    var c = new HttpCookie("referrerId") { Expires = DateTime.Now.AddDays(-1) };
+                        //    Response.Cookies.Add(c);
+                        //}
+                        return RedirectToLocal(returnUrl);
                     }
                 }
+                //}
                 AddErrors(result);
-                ModelState.AddModelError("", stripeResult.Error);
+                //ModelState.AddModelError("", stripeResult.Error);
             }
 
             ViewBag.ReturnUrl = returnUrl;

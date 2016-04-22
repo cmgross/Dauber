@@ -11,88 +11,97 @@
 <div class="text-center">
     <h3 class="featurette-heading">Fitness Coaching Simplified</h3>
     <br />
-    <p><a href="#aboutDivider">Why Dauber?</a> | <a href="#pricingDivider">Pricing</a> | <a href="#testimonialsDivider">Testimonials</a></p>
+    <p>
+        <a href="#aboutd">Why Dauber?</a> |
+        @*<a href="#pricingDivider">Pricing</a> |*@
+        <a href="#testimonialsd">Testimonials</a>
+    </p>
 </div>
-<hr class="featurette-divider" id="aboutDivider">
+<hr class="featurette-divider" id="aboutd">
 <!-- First Featurette -->
 <div class="featurette" id="about">
     <img class="featurette-image img-responsive pull-right" src="~\Images/dauberExampleBoth.gif">
     <h3 class="featurette-heading">
         Why <span class="text-muted">Dauber?</span>
-</h3>
+    </h3>
     <p class="lead">Dauber automates gathering data from MyFitnessPal and Fitocracy.</p>
     <p>Dauber allows you to easily import your clients' MyFitnessPal nutrition information, as well as number of times each client tracked a workout in Fitocracy, DIRECTLY and AUTOMATICALLY into Google Sheets.</p>
-    <p>Save yourself and your clients both the time and hassle of entering this manually, and <a href="" onclick=" location.href='@Url.Action("UpdatePlan", "MyAccount")' ">login now</a> to get started with a FREE account! (up to 5 clients)</p>
+    <p>
+        Save yourself and your clients both the time and hassle of entering this manually, and
+        @Html.ActionLink("login now", "Login", "Account")
+        @*<a href="" onclick=" location.href = '@Url.Action("Login", "Account")' ">
+                login now
+            </a>*@ to get started with a FREE account! (up to 100 clients)
+    </p>
     <p><a href="#">[top]</a></p>
 </div>
-<hr class="featurette-divider" id="pricingDivider">
 
 <!-- Second Featurette -->
-<div class="featurette" id="pricing">
-    <div class="container">
-        <div class="row text-center">
-            <h2 class="featurette-heading">
-                Pricing <span class="text-muted">Plans</span>
-            </h2>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="well">
-                    <h2 class="text-muted">Free</h2>
-                    <ul>
-                        <li>Up to 5 clients</li>
-                        <li>Limited support</li>
-                    </ul>
-                    <hr>
-                    <h3>Free!</h3>
-                    <hr>
-                    <p>
-                        <input type="button" class="btn btn-default btn-sm" value="Select Plan" onclick=" location.href='@Url.Action("UpdatePlan", "MyAccount")' " />
-                    </p>
+@*<div class="featurette" id="pricing">
+        <div class="container">
+            <div class="row text-center">
+                <h2 class="featurette-heading">
+                    Pricing <span class="text-muted">Plans</span>
+                </h2>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="well">
+                        <h2 class="text-muted">Free</h2>
+                        <ul>
+                            <li>Up to 5 clients</li>
+                            <li>Limited support</li>
+                        </ul>
+                        <hr>
+                        <h3>Free!</h3>
+                        <hr>
+                        <p>
+                            <input type="button" class="btn btn-default btn-sm" value="Select Plan" onclick=" location.href='@Url.Action("UpdatePlan", "MyAccount")' " />
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="well">
+                        <h2 class="text-success">Pro</h2>
+                        <ul>
+                            <li>Up to 25 clients</li>
+                            <li>Unlimited support</li>
+                        </ul>
+                        <hr>
+                        <h3>$30 / month</h3>
+                        <hr>
+                        <p>
+                            <input type="button" class="btn btn-success btn-sm" value="Select Plan" onclick=" location.href='@Url.Action("UpdatePlan", "MyAccount")' " />
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="well">
+                        <h2 class="text-warning">Elite</h2>
+                        <ul>
+                            <li>Up to 50 clients</li>
+                            <li>Unlimited support</li>
+                        </ul>
+                        <hr>
+                        <h3>$50 / month</h3>
+                        <hr>
+                        <p>
+                            <input type="button" class="btn btn-warning btn-sm" value="Select Plan" onclick=" location.href='@Url.Action("UpdatePlan", "MyAccount")' " />
+                        </p>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="well">
-                    <h2 class="text-success">Pro</h2>
-                    <ul>
-                        <li>Up to 25 clients</li>
-                        <li>Unlimited support</li>
-                    </ul>
-                    <hr>
-                    <h3>$30 / month</h3>
-                    <hr>
-                    <p>
-                        <input type="button" class="btn btn-success btn-sm" value="Select Plan" onclick=" location.href='@Url.Action("UpdatePlan", "MyAccount")' " />
-                    </p>
-                </div>
+            <div class="row text-center">
+                <h3>
+                    Have more than 50 clients? <a href="mailto:chuck@chuckgrossfitness.com">Let's talk!</a>
+                </h3>
             </div>
-            <div class="col-md-4">
-                <div class="well">
-                    <h2 class="text-warning">Elite</h2>
-                    <ul>
-                        <li>Up to 50 clients</li>
-                        <li>Unlimited support</li>
-                    </ul>
-                    <hr>
-                    <h3>$50 / month</h3>
-                    <hr>
-                    <p>
-                        <input type="button" class="btn btn-warning btn-sm" value="Select Plan" onclick=" location.href='@Url.Action("UpdatePlan", "MyAccount")' " />
-                    </p>
-                </div>
+            <div class="row text-center">
+                <p><a href="#">[top]</a></p>
             </div>
         </div>
-        <div class="row text-center">
-            <h3>
-                Have more than 50 clients? <a href="mailto:chuck@chuckgrossfitness.com">Let's talk!</a>
-            </h3>
-        </div>
-        <div class="row text-center">
-            <p><a href="#">[top]</a></p>
-        </div>
-    </div>
-</div>
-<hr class="featurette-divider" id="testimonialsDivider">
+    </div>*@
+<hr class="featurette-divider" id="testimonialsd">
 
 <!-- Third Featurette -->
 <div class="featurette" id="testimonials">
@@ -122,26 +131,26 @@
                                     <img class="img-circle" src="~/Images/ben.jpg" style="width: 100px; height: 100px;">
                                 </div>
                                 <div class="col-sm-9">
-                                    <p>I provide macro targets for my clients and ask them to log their daily macros in a spreadsheet. Many of them use MFP to track their food intake. Dauber makes it easy for them to provide the macros for me without duplication of effort. That makes it easier for me to keep them on track too. I would recommend Dauber to any coaches who want to streamline the process of tracking their clients' macros. The pricing structure makes it affordable even if you have a large client base.</p>
+                                    <p>I provide macro targets for my clients and ask them to log their daily macros in a spreadsheet. Many of them use MFP to track their food intake. Dauber makes it easy for them to provide the macros for me without duplication of effort. That makes it easier for me to keep them on track too. I would recommend Dauber to any coaches who want to streamline the process of tracking their clients' macros.</p>
                                     <small><a href="http://www.benjamintormey.com" target="_blank">Ben Tormey (Director, Benjamin Tormey Limited)</a></small>
                                 </div>
                             </div>
                         </blockquote>
                     </div>
                     <!-- Quote 2 -->
-                    @*<div class="item">
+                    <div class="item">
                             <blockquote>
                                 <div class="row">
                                     <div class="col-sm-3 text-center">
-                                        <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/mijustin/128.jpg" style="width: 100px;height:100px;">
+                                        <img class="img-circle" src="~/Images/chuck.jpg" style="width: 100px;height:100px;">
                                     </div>
                                     <div class="col-sm-9">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam auctor nec lacus ut tempor. Mauris.</p>
-                                        <small>Someone famous</small>
+                                        <p>I'm not just the creator of Dauber, I also use it every day! It allowed me to save so much time by getting an overview of which clients were adhering to their plans, and which weren't. This time savings allowed me to scale my business quickly without sacrificing the quality of the care that I put into every client interaction!</p>
+                                        <small><a href="http://chuckgrossfitness.com" target="_blank">Chuck Gross (Owner, Chuck Gross Fitness, LLC)</a></small>
                                     </div>
                                 </div>
                             </blockquote>
-                        </div>*@
+                        </div>
                     <!-- Quote 3 -->
                     @*<div class="item">
                             <blockquote>
